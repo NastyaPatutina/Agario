@@ -8,6 +8,8 @@ package com.mygdx.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.mygdx.gameworld.GameRenderer;
+import com.mygdx.gameworld.GameWorld;
 
 /**
  *
@@ -15,16 +17,26 @@ import com.badlogic.gdx.graphics.GL20;
  */
 public class GameScreen implements Screen  {
 
+    private GameWorld world;
+    private GameRenderer renderer;
+    
    public GameScreen() {
+         float screenWidth = Gdx.graphics.getWidth();
+        float screenHeight = Gdx.graphics.getHeight();
+        float gameWidth = 136;
+        float gameHeight = screenHeight / (screenWidth / gameWidth);
+        int midPointY = (int) (gameHeight / 2);
+
+        world = new GameWorld(midPointY);
+        renderer = new GameRenderer(world); // initialize renderer
         Gdx.app.log("GameScreen", "Attached");
     }
 
     @Override
     public void render(float delta) {
-        // Sets a Color to Fill the Screen with (RGB = 10, 15, 230), Opacity of 1 (100%)
-        Gdx.gl.glClearColor(10/255.0f, 15/255.0f, 230/255.0f, 1f);
-        // Fills the screen with the selected color
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        // Мы передаем delta в update метод, для того, чтобы мы могли сделать фреймо-зависимые вычисления
+        world.update(delta); // GameWorld updates 
+        renderer.render(); // GameRenderer renders
     }
 
     @Override
