@@ -17,7 +17,7 @@ public class GameWorld {
     
     private PrimaryBacterium _primaryBacterium;
 
-    public GameWorld() {
+    public GameWorld(int midPointY) {
         _primaryBacterium = new PrimaryBacterium(33, midPointY - 5, 15);
     }
 
