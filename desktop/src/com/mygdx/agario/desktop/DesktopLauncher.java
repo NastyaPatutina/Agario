@@ -1,8 +1,9 @@
-package com.mygdx.game.desktop;
+package com.mygdx.agario.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.Agario;
+import com.mygdx.agario.Agario;
+
 import java.util.ArrayList;
 
 public class DesktopLauncher {
