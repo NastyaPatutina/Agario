@@ -5,6 +5,7 @@
  */
 package com.mygdx.screens;
 
+import AgarioHelpers.InputHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -30,6 +31,8 @@ public class GameScreen implements Screen  {
         world = new GameWorld(midPointY);
         renderer = new GameRenderer(world); // initialize renderer
         Gdx.app.log("GameScreen", "Attached");
+        Gdx.input.setInputProcessor(new InputHandler(world.getPrimaryBacterium()));
+
     }
 
     @Override
