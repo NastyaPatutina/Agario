@@ -14,6 +14,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.mygdx.gameobjects.PrimaryBacterium;
+import com.mygdx.gameobjects.SimpleBacterium;
+import java.util.ArrayList;
 
 /**
  *
@@ -44,9 +46,10 @@ public class GameRenderer {
         shapeRenderer.setProjectionMatrix(cam.combined);
     }
     
-    public void render(float runTime) {
+    public void render() {
         // мы уберем это из цикла далее, для улучшения производительности
-        PrimaryBacterium bacterium = myWorld.getPrimaryBacterium();
+        PrimaryBacterium bacterium = myWorld.getPlayerBacterium();
+        ArrayList<SimpleBacterium> bacteriums = myWorld.getSimpleBacteriums();
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
@@ -72,11 +75,16 @@ public class GameRenderer {
         
         // Отменим прозрачность
         // Это хорошо для производительности, когда отрисовываем картинки без прозрачности
-        shapeRenderer.setColor(Color.FOREST);
+        shapeRenderer.setColor(bacterium.getColor());
         shapeRenderer.circle(bacterium.getX(), bacterium.getY(), bacterium.getRadius());
-
+        for(SimpleBacterium bacter : bacteriums) {
+            shapeRenderer.setColor(bacter.getColor());
+            shapeRenderer.circle(bacter.getX(), bacter.getY(), bacter.getRadius());   
+        }
         // Заканчиваем SpriteBatch
-        shapeRenderer.end();
+        shapeRenderer.end();     
+        
+
         
     }
 }

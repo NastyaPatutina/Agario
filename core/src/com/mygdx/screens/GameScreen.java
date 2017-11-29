@@ -20,7 +20,6 @@ public class GameScreen implements Screen  {
 
     private GameWorld world;
     private GameRenderer renderer;
-    private float runTime = 0;
     
    public GameScreen() {
         float screenWidth = Gdx.graphics.getWidth();
@@ -38,10 +37,9 @@ public class GameScreen implements Screen  {
 
     @Override
     public void render(float delta) {
-        runTime += delta;
         // Мы передаем delta в update метод, для того, чтобы мы могли сделать фреймо-зависимые вычисления
         world.update(delta); // GameWorld updates 
-        renderer.render(runTime); // GameRenderer renders
+        renderer.render(); // GameRenderer renders
     }
 
     @Override

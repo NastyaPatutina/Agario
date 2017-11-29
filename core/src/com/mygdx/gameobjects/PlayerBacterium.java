@@ -6,7 +6,9 @@
 package com.mygdx.gameobjects;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.gameworld.GameWorld;
 
 /**
  *
@@ -14,10 +16,26 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class PlayerBacterium extends PrimaryBacterium{
     
-    private int diffVelocity = 10;
+    
+    private String nameUser = "User";
+    
+    public PlayerBacterium(float x, float y, int radius, GameWorld world) {
+        super(x, y, radius, world);
+        _color = Color.GOLD;
+    }
+    
+    @Override
+    public void update(float delta) {
+        //velocity.add(acceleration.cpy().scl(delta));
 
-    public PlayerBacterium(float x, float y, int radius) {
-        super(x, y, radius);
+        if (velocity.y > 200) {
+            velocity.y = 200;
+        }
+        if (velocity.x > 200) {
+            velocity.x = 200;
+        }
+        
+        position.add(velocity.cpy().scl(delta));
     }
 
     public void right() {
