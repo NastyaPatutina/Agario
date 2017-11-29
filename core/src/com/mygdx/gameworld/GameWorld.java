@@ -18,7 +18,7 @@ public class GameWorld {
     private PrimaryBacterium _primaryBacterium;
 
     public GameWorld(int midPointY) {
-        _primaryBacterium = new PrimaryBacterium(33, midPointY - 5, 15);
+        _primaryBacterium = new PrimaryBacterium(33, midPointY - 5, 5);
     }
 
     public void update(float delta) {

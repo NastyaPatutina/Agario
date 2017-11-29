@@ -11,8 +11,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Agario";
                 ArrayList<String> str = new ArrayList <String>();
-                config.width = 272;
-                config.height = 408;
+                config.width = 500;
+                config.height = 500;
                 new LwjglApplication(new Agario(), config);
 	}
 }

@@ -20,16 +20,17 @@ public class GameScreen implements Screen  {
 
     private GameWorld world;
     private GameRenderer renderer;
+    private float runTime = 0;
     
    public GameScreen() {
-         float screenWidth = Gdx.graphics.getWidth();
+        float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
         float gameWidth = 136;
         float gameHeight = screenHeight / (screenWidth / gameWidth);
         int midPointY = (int) (gameHeight / 2);
 
         world = new GameWorld(midPointY);
-        renderer = new GameRenderer(world); // initialize renderer
+        renderer = new GameRenderer(world, (int) gameHeight, midPointY);
         Gdx.app.log("GameScreen", "Attached");
         Gdx.input.setInputProcessor(new InputHandler(world.getPrimaryBacterium()));
 
@@ -37,9 +38,10 @@ public class GameScreen implements Screen  {
 
     @Override
     public void render(float delta) {
+        runTime += delta;
         // Мы передаем delta в update метод, для того, чтобы мы могли сделать фреймо-зависимые вычисления
         world.update(delta); // GameWorld updates 
-        renderer.render(); // GameRenderer renders
+        renderer.render(runTime); // GameRenderer renders
     }
 
     @Override
