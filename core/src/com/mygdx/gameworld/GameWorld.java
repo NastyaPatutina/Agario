@@ -5,11 +5,8 @@
  */
 package com.mygdx.gameworld;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.gameobjects.PlayerBacterium;
-import com.mygdx.gameobjects.PrimaryBacterium;
 import com.mygdx.gameobjects.SimpleBacterium;
 import java.util.ArrayList;
 

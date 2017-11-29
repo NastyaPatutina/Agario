@@ -7,7 +7,6 @@ package com.mygdx.gameobjects;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.gameworld.GameWorld;
 
 /**

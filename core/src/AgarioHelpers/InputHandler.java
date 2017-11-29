@@ -5,11 +5,8 @@
  */
 package AgarioHelpers;
 
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.mygdx.gameobjects.PlayerBacterium;
-import com.mygdx.gameobjects.PrimaryBacterium;
 
 /**
  *
