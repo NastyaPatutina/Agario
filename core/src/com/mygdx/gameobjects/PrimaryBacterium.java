@@ -5,44 +5,40 @@
  */
 package com.mygdx.gameobjects;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 
 /**
  *
  * @author anast
  */
-public class PrimaryBacterium {
-    private Vector2 position;
-    private Vector2 velocity;
-    private Vector2 acceleration;
+public class PrimaryBacterium { 
+    Vector2 position;
+    //private Vector2 acceleration;
+    Vector2 velocity;
 
-    private float rotation; // Для обработки поворота птицы
-    private int radius;
-
+    int radius;
     
     public PrimaryBacterium(float x, float y, int radius) {
         this.radius = radius;
         position = new Vector2(x, y);
+        //acceleration = new Vector2(0, 460);
         velocity = new Vector2(0, 0);
-        acceleration = new Vector2(0, 460);
     }
     
     public void update(float delta) {
+        //velocity.add(acceleration.cpy().scl(delta));
 
-        velocity.add(acceleration.cpy().scl(delta));
-
-        if (velocity.y > 200) {
-            velocity.y = 200;
+        if (velocity.y > 500) {
+            velocity.y = 500;
         }
-
+        if (velocity.x > 500) {
+            velocity.x = 500;
+        }
+        
         position.add(velocity.cpy().scl(delta));
-
     }
-
-    public void onClick() {
-        velocity.y = -140;
-    }
-
+    
     public float getX() {
         return position.x;
     }
@@ -53,11 +49,6 @@ public class PrimaryBacterium {
 
     public float getRadius() {
         return radius;
-    }
-
-
-    public float getRotation() {
-        return rotation;
     }
 
 }

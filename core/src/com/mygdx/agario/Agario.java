@@ -15,7 +15,7 @@ public class Agario extends Game {
     public void create() {
         Gdx.app.log("Agario", "created");
         AssetLoader.load();
-         setScreen(new GameScreen());
+        setScreen(new GameScreen());
     }
     @Override
     public void dispose() {

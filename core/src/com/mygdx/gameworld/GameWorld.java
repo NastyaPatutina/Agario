@@ -7,6 +7,7 @@ package com.mygdx.gameworld;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.gameobjects.PlayerBacterium;
 import com.mygdx.gameobjects.PrimaryBacterium;
 
 /**
@@ -15,10 +16,10 @@ import com.mygdx.gameobjects.PrimaryBacterium;
  */
 public class GameWorld {
     
-    private PrimaryBacterium _primaryBacterium;
+    private PlayerBacterium _primaryBacterium;
 
     public GameWorld(int midPointY) {
-        _primaryBacterium = new PrimaryBacterium(33, midPointY - 5, 5);
+        _primaryBacterium = new PlayerBacterium(33, midPointY - 5, 5);
     }
 
     public void update(float delta) {
@@ -28,5 +29,9 @@ public class GameWorld {
     public PrimaryBacterium getPrimaryBacterium() {
         return _primaryBacterium;
 
+    }
+
+    public PlayerBacterium getPlayerBacterium() {
+        return _primaryBacterium;
     }
 }

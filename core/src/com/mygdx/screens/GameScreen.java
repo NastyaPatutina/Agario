@@ -32,7 +32,7 @@ public class GameScreen implements Screen  {
         world = new GameWorld(midPointY);
         renderer = new GameRenderer(world, (int) gameHeight, midPointY);
         Gdx.app.log("GameScreen", "Attached");
-        Gdx.input.setInputProcessor(new InputHandler(world.getPrimaryBacterium()));
+        Gdx.input.setInputProcessor(new InputHandler(world.getPlayerBacterium()));
 
     }
 

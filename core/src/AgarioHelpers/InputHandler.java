@@ -5,7 +5,10 @@
  */
 package AgarioHelpers;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.mygdx.gameobjects.PlayerBacterium;
 import com.mygdx.gameobjects.PrimaryBacterium;
 
 /**
@@ -14,25 +17,26 @@ import com.mygdx.gameobjects.PrimaryBacterium;
  */
 public class InputHandler implements InputProcessor {
 
-    private PrimaryBacterium _bacterium;
+    private PlayerBacterium _bacterium;
 
-    public InputHandler(PrimaryBacterium bacterium) {
+    public InputHandler(PlayerBacterium bacterium) {
        _bacterium = bacterium;
     }
     
    @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        _bacterium.onClick();
         return false;
     }
 
     @Override
     public boolean keyDown(int keycode) {
+        _bacterium.keyDown(keycode);
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
+        _bacterium.keyUp(keycode);
         return false;
     }
 
