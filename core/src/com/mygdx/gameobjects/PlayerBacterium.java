@@ -22,6 +22,7 @@ public class PlayerBacterium extends PrimaryBacterium{
     public PlayerBacterium(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
         _color = Color.GOLD;
+        diffVelocity = 20;
     }
     
     @Override

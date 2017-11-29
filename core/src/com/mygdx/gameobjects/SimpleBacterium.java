@@ -26,7 +26,7 @@ public class SimpleBacterium extends PrimaryBacterium {
         do {
            position.x = abs(random.nextInt() % 120);
            position.y = abs(random.nextInt() % 120);
-           radius = abs(random.nextInt() % 8);
+           radius = abs(random.nextInt() % 7);
         } while (_world.containsBacterium(position, radius + 5));
            float r = abs(random.nextFloat());
            float g = abs(random.nextFloat());
@@ -51,10 +51,14 @@ public class SimpleBacterium extends PrimaryBacterium {
                 velocity.y-=diffVelocity;
                 break;
         }
-        if (velocity.x > 20)
-            velocity.x -= 10;
-        if (velocity.y > 20)
-            velocity.y -= 10;
+        if (velocity.x > 10)
+            velocity.x -= 3;
+        if (velocity.y > 10)
+            velocity.y -= 3;
+        if (velocity.x < -10)
+            velocity.x += 3;
+        if (velocity.y < -10)
+            velocity.y += 3;
         position.add(velocity.cpy().scl(delta));
         if (position.x < 0){
             position.x = 135;
