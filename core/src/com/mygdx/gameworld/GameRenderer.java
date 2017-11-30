@@ -82,8 +82,9 @@ public class GameRenderer {
         }
         // Заканчиваем SpriteBatch
         shapeRenderer.end();     
-        
+                
+    }
 
-        
+    public void gameOver() {
     }
 }

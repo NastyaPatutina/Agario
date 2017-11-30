@@ -58,7 +58,9 @@ public abstract class PrimaryBacterium {
     }
     
     public void eat(int radiusEatenBactery) {
-        radius += radiusEatenBactery;
+        radius += radiusEatenBactery/3;
+        if (radius > 20)
+            radius =20; 
         diffVelocity = 15 - radius;
     }
     

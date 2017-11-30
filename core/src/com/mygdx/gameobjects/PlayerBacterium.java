@@ -8,6 +8,8 @@ package com.mygdx.gameobjects;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.gameworld.GameWorld;
+import static java.lang.Math.abs;
+import static java.lang.Math.exp;
 
 /**
  *
@@ -21,7 +23,7 @@ public class PlayerBacterium extends PrimaryBacterium{
     public PlayerBacterium(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
         _color = Color.GOLD;
-        diffVelocity = 20;
+        diffVelocity = 3;
     }
     
     @Override
@@ -34,22 +36,40 @@ public class PlayerBacterium extends PrimaryBacterium{
         if (velocity.x > 200) {
             velocity.x = 200;
         }
+        if (abs(velocity.x) < 1) {
+            velocity.x*=3;
+        }
+        if (abs(velocity.y) < 1) {
+            velocity.y*=3;
+        }
         
         position.add(velocity.cpy().scl(delta));
+        System.out.println(velocity);
+        if (position.x < 0){
+            position.x = 135;
+        }
+         if (position.y < 0){
+            position.y = 135;
+         }
+         if (position.x > 135){
+            position.x = 0;
+         }
+         if (position.y > 135){
+            position.y = 0;
+         }
     }
 
     public void right() {
-        velocity.x+=diffVelocity;
+        velocity.x = (float) exp((diffVelocity)*radius/10);
     }
     public void left() {
-        velocity.x-=diffVelocity;
-        
+        velocity.x = (float) - exp((diffVelocity)*radius/10);        
     }
     public void up() {
-        velocity.y-=diffVelocity;
+        velocity.y = (float) - exp((diffVelocity)*radius/10);
     }
     public void down() {
-        velocity.y+=diffVelocity;
+        velocity.y = (float) exp((diffVelocity)*radius/10);
     }
     
     public void rightLow() {

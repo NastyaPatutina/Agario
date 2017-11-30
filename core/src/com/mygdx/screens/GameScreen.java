@@ -37,8 +37,11 @@ public class GameScreen implements Screen  {
     @Override
     public void render(float delta) {
         // Мы передаем delta в update метод, для того, чтобы мы могли сделать фреймо-зависимые вычисления
-        world.update(delta); // GameWorld updates 
-        renderer.render(); // GameRenderer renders
+       if (world.update(delta)) { // GameWorld updates 
+            renderer.render(); // GameRenderer renders
+       } else {           
+            renderer.gameOver(); // GameRenderer renders
+       }
     }
 
     @Override
