@@ -73,9 +73,11 @@ public class GameRenderer {
         shapeRenderer.begin(ShapeType.Filled);
         
         // Отменим прозрачность
-        // Это хорошо для производительности, когда отрисовываем картинки без прозрачности
-        shapeRenderer.setColor(bacterium.getColor());
-        shapeRenderer.circle(bacterium.getX(), bacterium.getY(), bacterium.getRadius());
+        if (bacterium != null) {
+            // Это хорошо для производительности, когда отрисовываем картинки без прозрачности
+            shapeRenderer.setColor(bacterium.getColor());
+            shapeRenderer.circle(bacterium.getX(), bacterium.getY(), bacterium.getRadius());
+        }
         for(SimpleBacterium bacter : bacteriums) {
             shapeRenderer.setColor(bacter.getColor());
             shapeRenderer.circle(bacter.getX(), bacter.getY(), bacter.getRadius());   
@@ -85,6 +87,4 @@ public class GameRenderer {
                 
     }
 
-    public void gameOver() {
-    }
 }

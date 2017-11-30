@@ -7,6 +7,7 @@ package com.mygdx.gameobjects;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.gameworld.GameWorld;
 import static java.lang.Math.abs;
 import static java.lang.Math.exp;
@@ -60,16 +61,16 @@ public class PlayerBacterium extends PrimaryBacterium{
     }
 
     public void right() {
-        velocity.x = (float) exp((diffVelocity)*radius/10);
+        velocity.x = 2 + (float) exp((diffVelocity)*radius);
     }
     public void left() {
-        velocity.x = (float) - exp((diffVelocity)*radius/10);        
+        velocity.x = - 2 - (float) exp((diffVelocity)*radius/10);        
     }
     public void up() {
-        velocity.y = (float) - exp((diffVelocity)*radius/10);
+        velocity.y = - 2 - (float) exp((diffVelocity)*radius/10);
     }
     public void down() {
-        velocity.y = (float) exp((diffVelocity)*radius/10);
+        velocity.y = 2 + (float) exp((diffVelocity)*radius/10);
     }
     
     public void rightLow() {
@@ -117,5 +118,10 @@ public class PlayerBacterium extends PrimaryBacterium{
                         downLow();
                         break;
             }
+    }
+
+    public void setCircle(int x, int y, int radius) {
+        this.radius = radius;
+        position = new Vector2(x, y);
     }
 }

@@ -57,6 +57,10 @@ public abstract class PrimaryBacterium {
         return radius;
     }
     
+    public GameWorld getWorld() {
+        return _world;
+    }
+        
     public void eat(int radiusEatenBactery) {
         radius += radiusEatenBactery/3;
         if (radius > 20)

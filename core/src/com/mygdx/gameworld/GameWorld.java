@@ -16,24 +16,46 @@ import java.util.Random;
  *
  * @author anast
  */
+
+
 public class GameWorld {
-    
+    private GameState currentState;
+    public enum GameState {
+        READY, RUNNING, GAMEOVER
+    }
     private PlayerBacterium _playerBacterium;
     private ArrayList<SimpleBacterium> _bacteriums = new ArrayList();
     int maxCountOfBacteriums = 30;
     
     public GameWorld(int midPointY) {
-        _playerBacterium = new PlayerBacterium(33, midPointY - 5, 6, this);
+        currentState = GameState.READY;
+        _playerBacterium = new PlayerBacterium(33, 40, 6, this);
         for(int i = 0; i < maxCountOfBacteriums; i++){
             _bacteriums.add(new SimpleBacterium(this));
         }
     }
 
-    public boolean update(float delta) {
-       
+    public void update(float delta) {
+       switch (currentState) {
+        case READY:
+            updateReady(delta);
+            break;
+
+        case RUNNING:
+        default:
+            updateRunning(delta);
+            break;
+        }
+    }
+    
+    private void updateReady(float delta) {
+        // Пока что ничего не делаем
+    }
+    private void updateRunning(float delta) {
         //Поедание
-        if (!naturalSelection())
-            return false;
+        if (!naturalSelection()){
+            return;
+        }
         //Добавляем новых бактерий
         Random random = new Random();
         if (random.nextBoolean()) {
@@ -44,7 +66,6 @@ public class GameWorld {
         for(SimpleBacterium bacter:_bacteriums ){
             bacter.update(delta);
         }
-        return true;
     }
 
     public ArrayList<SimpleBacterium> getSimpleBacteriums() {
@@ -97,11 +118,34 @@ public class GameWorld {
                 }
             }
         }
-        _bacteriums.removeAll(eatenList);
+        
         if (eatenList.contains(_playerBacterium)) {
-            _playerBacterium = null;
+            currentState = GameState.GAMEOVER;
             return false;
         }
+        _bacteriums.removeAll(eatenList);
+        
         return true;
+    }
+    
+    public boolean isReady() {
+        return currentState == GameState.READY;
+    }
+
+    public void start() {
+        currentState = GameState.RUNNING;
+    }
+
+    public void restart() {
+        currentState = GameState.READY;
+        _bacteriums.clear();
+        _playerBacterium.setCircle(33, 40, 6);
+        for(int i = 0; i < maxCountOfBacteriums; i++){
+            _bacteriums.add(new SimpleBacterium(this));
+        }
+    }
+
+    public boolean isGameOver() {
+        return currentState == GameState.GAMEOVER;
     }
 }

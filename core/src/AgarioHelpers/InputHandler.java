@@ -27,7 +27,16 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+        if (_bacterium.getWorld().isReady()) {
+            _bacterium.getWorld().start();
+        }
         _bacterium.keyDown(keycode);
+        
+        if (_bacterium.getWorld().isGameOver()) {
+            // Обнулим все перменные, перейдем в GameState.READ
+            _bacterium.getWorld().restart();
+            System.out.println(_bacterium.getWorld().isReady());
+        }
         return false;
     }
 
