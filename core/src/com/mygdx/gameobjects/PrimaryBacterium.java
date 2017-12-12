@@ -61,8 +61,8 @@ public abstract class PrimaryBacterium {
         return _world;
     }
         
-    public void eat(int radiusEatenBactery) {
-        radius += radiusEatenBactery/3;
+    public void eat(int weight) {
+        radius += weight/3;
         if (radius > 20)
             radius =20; 
         diffVelocity = 15 - radius;
@@ -82,4 +82,10 @@ public abstract class PrimaryBacterium {
         return false;
     }
 
+    public void setCircle(int x, int y, int radius) {
+        this.radius = radius;
+        position = new Vector2(x, y);
+    }
+    abstract float changeVelocity ();
+    
 }

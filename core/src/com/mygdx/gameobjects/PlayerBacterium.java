@@ -16,7 +16,7 @@ import static java.lang.Math.exp;
  *
  * @author npatutina
  */
-public class PlayerBacterium extends PrimaryBacterium{
+public class PlayerBacterium extends PredatoryBacterium{
     
     
     private String nameUser = "User";
@@ -60,30 +60,30 @@ public class PlayerBacterium extends PrimaryBacterium{
          }
     }
 
-    public void right() {
-        velocity.x = 2 + (float) exp((diffVelocity)*radius);
+    private void right() {
+        velocity.x = changeVelocity();
     }
-    public void left() {
-        velocity.x = - 2 - (float) exp((diffVelocity)*radius/10);        
+    private void left() {
+        velocity.x = - changeVelocity();        
     }
-    public void up() {
-        velocity.y = - 2 - (float) exp((diffVelocity)*radius/10);
+    private void up() {
+        velocity.y = - changeVelocity();
     }
-    public void down() {
-        velocity.y = 2 + (float) exp((diffVelocity)*radius/10);
+    private void down() {
+        velocity.y = changeVelocity();
     }
     
-    public void rightLow() {
+    private void rightLow() {
         velocity.x=0;
     }
-    public void leftLow() {
+    private void leftLow() {
         velocity.x=0;
         
     }
-    public void upLow() {
+    private void upLow() {
         velocity.y=0;
     }
-    public void downLow() {
+    private void downLow() {
         velocity.y=0;
     }
     
@@ -120,8 +120,8 @@ public class PlayerBacterium extends PrimaryBacterium{
             }
     }
 
-    public void setCircle(int x, int y, int radius) {
-        this.radius = radius;
-        position = new Vector2(x, y);
+    @Override
+    float changeVelocity() {
+        return (float)(2 +  exp((diffVelocity)*radius/10));
     }
 }
