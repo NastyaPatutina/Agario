@@ -10,5 +10,5 @@ package com.mygdx.gameobjects;
  * @author npatutina
  */
 public interface ProfitableBacterium {
-    void improve();
+    void improve(PredatoryBacterium bacter);
 }

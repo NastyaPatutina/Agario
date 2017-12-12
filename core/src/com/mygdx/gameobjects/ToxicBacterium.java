@@ -10,5 +10,5 @@ package com.mygdx.gameobjects;
  * @author npatutina
  */
 public interface ToxicBacterium {
-    void poison();
+    void poison(PredatoryBacterium bacter);
 }

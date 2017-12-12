@@ -22,8 +22,9 @@ public class Staphylococcus extends SimpleBacterium implements ToxicBacterium  {
     }
 
     @Override
-    public void poison() {
+    public void poison(PredatoryBacterium bacter) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     
 }

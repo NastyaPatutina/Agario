@@ -28,7 +28,7 @@ public class Azotobacter extends SimpleBacterium implements ProfitableBacterium 
     }
 
     @Override
-    public void improve() {
+    public void improve(PredatoryBacterium bacter) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

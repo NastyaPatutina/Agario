@@ -15,4 +15,18 @@ public abstract class PredatoryBacterium extends PrimaryBacterium{
      public PredatoryBacterium(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
      }
+    public void eat(PrimaryBacterium food) {
+        if(food instanceof ProfitableBacterium){
+            ((ProfitableBacterium)food).improve(this);
+        } else         
+        if(food instanceof ToxicBacterium){
+            ((ToxicBacterium)food).poison(this);
+        } else{         
+            radius += food.getRadius()/3;
+            if (radius > 20)
+                radius =20; 
+            diffVelocity = 15 - radius;
+        }
+    }
+    
 }

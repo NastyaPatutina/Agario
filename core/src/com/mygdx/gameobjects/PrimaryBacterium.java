@@ -61,13 +61,6 @@ public abstract class PrimaryBacterium {
         return _world;
     }
         
-    public void eat(int weight) {
-        radius += weight/3;
-        if (radius > 20)
-            radius =20; 
-        diffVelocity = 15 - radius;
-    }
-    
     public boolean intersect(PrimaryBacterium other) {
         if ((Math.pow((double)(position.x - other.position.x), 2) + Math.pow((double)(position.y - other.position.y), 2)) < Math.pow((double)(radius + other.radius), 2)) {
             return true;
