@@ -21,8 +21,8 @@ public class Bifidobacterium extends SimpleBacterium {
         super(x, y, radius, world);
          _color = Color.WHITE;
     }
-    public Bifidobacterium(GameWorld world) {
-        super(world);
+    public Bifidobacterium(GameWorld world, int maxRadius) {
+        super(world, maxRadius);
          _color = Color.WHITE;
 
     }

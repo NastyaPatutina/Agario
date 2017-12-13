@@ -20,13 +20,13 @@ public abstract class BotBacterium extends PredatoryBacterium {
         super(x, y, radius, world);
     }
       
-    public BotBacterium(GameWorld world) {
+    public BotBacterium(GameWorld world, int maxRadius) {
         super();
         _world = world;
         do {
            position.x = abs(random.nextInt() % 120);
            position.y = abs(random.nextInt() % 120);
-           radius = abs(random.nextInt() % 7);
+           radius = abs(random.nextInt() % maxRadius);
         } while (_world.containsBacterium(position, radius + 5));
            float r = abs(random.nextFloat());
            float g = abs(random.nextFloat());

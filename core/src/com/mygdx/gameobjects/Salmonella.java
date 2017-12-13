@@ -18,8 +18,8 @@ public class Salmonella extends BotBacterium{
         super(x, y, radius, world);
     }
 
-    public Salmonella(GameWorld world) {
-        super(world);
+    public Salmonella(GameWorld world, int maxRadius) {
+        super(world, maxRadius);
          _color = Color.LIME;
 
     }

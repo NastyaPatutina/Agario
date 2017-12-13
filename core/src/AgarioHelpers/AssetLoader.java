@@ -23,7 +23,7 @@ public class AssetLoader {
 
         texture = new Texture(Gdx.files.internal("background.png"));
         texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-        bg = new TextureRegion(texture, 0, 0, 1000, 1000);
+        bg = new TextureRegion(texture, 0, 0, 1500, 1500);
         bg.flip(false, true);
     }
 

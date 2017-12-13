@@ -17,8 +17,8 @@ public class Azotobacter extends SimpleBacterium implements ProfitableBacterium 
     public Azotobacter(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
     }
-    public Azotobacter(GameWorld world) {
-        super(world);
+    public Azotobacter(GameWorld world, int maxRadius) {
+        super(world, maxRadius);
          _color = Color.BLUE;
 
     }

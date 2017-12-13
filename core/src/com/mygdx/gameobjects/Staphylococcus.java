@@ -17,8 +17,8 @@ public class Staphylococcus extends SimpleBacterium implements ToxicBacterium  {
     public Staphylococcus(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
     }
-    public Staphylococcus(GameWorld world) {
-        super(world);
+    public Staphylococcus(GameWorld world, int maxRadius) {
+        super(world, maxRadius);
          _color = Color.RED;
 
     }

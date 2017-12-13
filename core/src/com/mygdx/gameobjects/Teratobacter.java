@@ -18,15 +18,17 @@ public class Teratobacter extends BotBacterium implements ProfitableBacterium{
         super(x, y, radius, world);
     }
     
-    public Teratobacter(GameWorld world) {
-        super(world);
+    public Teratobacter(GameWorld world, int maxRadius) {
+        super(world, maxRadius);
          _color = Color.FOREST;
 
     }
 
     @Override
     public void improve(PredatoryBacterium bacter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        bacter.radius += 3;
+        bacter.velocity.x += 2;        
+        bacter.velocity.y += 2;
     }
     
 }
