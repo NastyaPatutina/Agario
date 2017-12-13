@@ -11,19 +11,15 @@ import com.mygdx.gameworld.GameWorld;
  *
  * @author npatutina
  */
-public class Teratobacter extends BotBacterium implements ProfitableBacterium{
-
-    public Teratobacter(float x, float y, int radius, GameWorld world) {
+public abstract class BotBacterium extends PredatoryBacterium {
+    
+    public BotBacterium(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
     }
-
+    
+    
     @Override
-    float changeVelocity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void improve(PredatoryBacterium bacter) {
+    public void update(float delta) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

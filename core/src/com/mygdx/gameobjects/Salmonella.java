@@ -11,15 +11,10 @@ import com.mygdx.gameworld.GameWorld;
  *
  * @author npatutina
  */
-public class Salmonella extends PredatoryBacterium{
+public class Salmonella extends BotBacterium{
 
     public Salmonella(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
-    }
-
-    @Override
-    public void update(float delta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
