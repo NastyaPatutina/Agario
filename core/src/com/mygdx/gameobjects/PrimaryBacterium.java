@@ -8,6 +8,7 @@ package com.mygdx.gameobjects;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.gameworld.GameWorld;
+import static java.lang.Math.pow;
 
 /**
  *
@@ -59,6 +60,10 @@ public abstract class PrimaryBacterium {
     
     public GameWorld getWorld() {
         return _world;
+    }
+    
+    public float distance(float x, float y){
+        return (float) pow(pow(position.x - x, 2) + pow(position.y - y, 2), 0.5);
     }
         
     public boolean intersect(PrimaryBacterium other) {

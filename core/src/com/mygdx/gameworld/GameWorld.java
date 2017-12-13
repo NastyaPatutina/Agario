@@ -29,13 +29,16 @@ public class GameWorld {
     public enum GameState {
         READY, RUNNING, GAMEOVER
     }
-    private PlayerBacterium _playerBacterium;
     private ArrayList<PrimaryBacterium> _bacteriums = new ArrayList();
     int maxCountOfBacteriums = 30;
     
     public GameWorld(int midPointY) {
         currentState = GameState.READY;
-        _playerBacterium = new PlayerBacterium(33, 40, 6, this);
+        fillworld();
+        
+    }
+    void fillworld(){
+        _bacteriums.add(new PlayerBacterium(33, 40, 6, this));
         for(int i = 0; i < maxCountOfBacteriums/5; i++){
             _bacteriums.add(new Bifidobacterium (this));
         }
@@ -80,7 +83,6 @@ public class GameWorld {
             createNewBacteriums();
         }
         //Обновляем бактерии
-        _playerBacterium.update(delta);
         for(PrimaryBacterium bacter:_bacteriums ){
             bacter.update(delta);
         }
@@ -92,12 +94,14 @@ public class GameWorld {
     }
 
     public PlayerBacterium getPlayerBacterium() {
-        return _playerBacterium;
+        for(PrimaryBacterium bacter : _bacteriums) {
+            if(bacter instanceof PlayerBacterium)
+                return (PlayerBacterium) bacter;
+        }
+        return null;
     }
     
     public boolean containsBacterium(Vector2 position, int radius){
-        if(_playerBacterium.intersect(position, radius))
-            return true;
         for(PrimaryBacterium bacter : _bacteriums) {
             if(bacter.intersect(position, radius))
                 return true;
@@ -159,9 +163,6 @@ public class GameWorld {
     private boolean naturalSelection(){
         ArrayList<PrimaryBacterium> eatenList = new ArrayList();
         for(PrimaryBacterium bacter : _bacteriums){
-            if (_playerBacterium!= null && bacter.intersect(_playerBacterium)) {
-                eatenList.add(naturalSelectionBetween(bacter,_playerBacterium));
-            }
             for(PrimaryBacterium bacterOther : _bacteriums){
                 if (bacter!= bacterOther && bacter.intersect(bacterOther)) {
                     eatenList.add(naturalSelectionBetween(bacter,bacterOther));
@@ -169,7 +170,7 @@ public class GameWorld {
             }
         }
         
-        if (eatenList.contains(_playerBacterium)) {
+        if (eatenList.contains(getPlayerBacterium())) {
             currentState = GameState.GAMEOVER;
             return false;
         }
@@ -189,14 +190,37 @@ public class GameWorld {
     public void restart() {
         currentState = GameState.READY;
         _bacteriums.clear();
-        _playerBacterium.setCircle(33, 40, 6);
-        for(int i = 0; i < maxCountOfBacteriums; i++){
-            
-            _bacteriums.add(new Bifidobacterium (this));
-        }
+        fillworld();
     }
 
     public boolean isGameOver() {
         return currentState == GameState.GAMEOVER;
     }
+    
+    public PredatoryBacterium getNearestPredatoryBacterium(PrimaryBacterium currentBacter) {
+       float minDistance = 10000;
+       PredatoryBacterium minBacter = null;
+
+       for(PrimaryBacterium bacter : _bacteriums) {
+            if(bacter instanceof PredatoryBacterium && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)){
+                minBacter = (PredatoryBacterium) bacter;
+                minDistance = currentBacter.distance(bacter.getX(), bacter.getY());
+            }
+        }
+       return minBacter;
+    }
+    
+    public SimpleBacterium getNearestSimpleBacterium(PrimaryBacterium currentBacter) {
+       float minDistance = 10000;
+       SimpleBacterium minBacter = null;
+
+       for(PrimaryBacterium bacter : _bacteriums) {
+            if(bacter instanceof SimpleBacterium && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)){
+                minBacter = (SimpleBacterium) bacter;
+                minDistance = currentBacter.distance(bacter.getX(), bacter.getY());
+            }
+        }
+       return minBacter;
+    }
+    
 }
