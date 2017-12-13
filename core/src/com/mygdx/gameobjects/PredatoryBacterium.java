@@ -15,6 +15,9 @@ public abstract class PredatoryBacterium extends PrimaryBacterium{
      public PredatoryBacterium(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
      }
+     public PredatoryBacterium() {
+        super();
+     }
     public void eat(PrimaryBacterium food) {
         if(food instanceof ProfitableBacterium){
             ((ProfitableBacterium)food).improve(this);

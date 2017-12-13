@@ -5,6 +5,7 @@
  */
 package com.mygdx.gameobjects;
 
+import com.badlogic.gdx.graphics.Color;
 import com.mygdx.gameworld.GameWorld;
 
 /**
@@ -17,9 +18,10 @@ public class Salmonella extends BotBacterium{
         super(x, y, radius, world);
     }
 
-    @Override
-    float changeVelocity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Salmonella(GameWorld world) {
+        super(world);
+         _color = Color.LIME;
+
     }
     
 }

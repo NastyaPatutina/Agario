@@ -5,6 +5,7 @@
  */
 package com.mygdx.gameobjects;
 
+import com.badlogic.gdx.graphics.Color;
 import com.mygdx.gameworld.GameWorld;
 
 /**
@@ -16,10 +17,11 @@ public class Teratobacter extends BotBacterium implements ProfitableBacterium{
     public Teratobacter(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
     }
+    
+    public Teratobacter(GameWorld world) {
+        super(world);
+         _color = Color.FOREST;
 
-    @Override
-    float changeVelocity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

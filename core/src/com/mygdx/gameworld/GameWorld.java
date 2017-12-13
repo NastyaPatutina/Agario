@@ -11,8 +11,10 @@ import com.mygdx.gameobjects.PlayerBacterium;
 import com.mygdx.gameobjects.PredatoryBacterium;
 import com.mygdx.gameobjects.PrimaryBacterium;
 import com.mygdx.gameobjects.Bifidobacterium;
+import com.mygdx.gameobjects.Salmonella;
 import com.mygdx.gameobjects.SimpleBacterium;
 import com.mygdx.gameobjects.Staphylococcus;
+import com.mygdx.gameobjects.Teratobacter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -28,7 +30,7 @@ public class GameWorld {
         READY, RUNNING, GAMEOVER
     }
     private PlayerBacterium _playerBacterium;
-    private ArrayList<SimpleBacterium> _bacteriums = new ArrayList();
+    private ArrayList<PrimaryBacterium> _bacteriums = new ArrayList();
     int maxCountOfBacteriums = 30;
     
     public GameWorld(int midPointY) {
@@ -42,6 +44,12 @@ public class GameWorld {
         }
         for(int i = 0; i < maxCountOfBacteriums/5; i++){
             _bacteriums.add(new Azotobacter (this));
+        }
+        for(int i = 0; i < maxCountOfBacteriums/5; i++){
+            _bacteriums.add(new Teratobacter (this));
+        }
+        for(int i = 0; i < maxCountOfBacteriums/5; i++){
+            _bacteriums.add(new Salmonella (this));
         }
     }
 
@@ -73,12 +81,12 @@ public class GameWorld {
         }
         //Обновляем бактерии
         _playerBacterium.update(delta);
-        for(SimpleBacterium bacter:_bacteriums ){
+        for(PrimaryBacterium bacter:_bacteriums ){
             bacter.update(delta);
         }
     }
 
-    public ArrayList<SimpleBacterium> getSimpleBacteriums() {
+    public ArrayList<PrimaryBacterium> getBacteriums() {
         return _bacteriums;
 
     }
@@ -90,7 +98,7 @@ public class GameWorld {
     public boolean containsBacterium(Vector2 position, int radius){
         if(_playerBacterium.intersect(position, radius))
             return true;
-        for(SimpleBacterium bacter : _bacteriums) {
+        for(PrimaryBacterium bacter : _bacteriums) {
             if(bacter.intersect(position, radius))
                 return true;
         }
@@ -138,17 +146,23 @@ public class GameWorld {
                 if (random.nextInt()%7 == 0){
                     _bacteriums.add(new Staphylococcus (this));
                 }
+                if (random.nextInt()%2 == 0){
+                    _bacteriums.add(new Salmonella (this));
+                }
+                if (random.nextInt()%2 == 0){
+                    _bacteriums.add(new Teratobacter (this));
+                }
             }
         }
     }
     
     private boolean naturalSelection(){
         ArrayList<PrimaryBacterium> eatenList = new ArrayList();
-        for(SimpleBacterium bacter : _bacteriums){
+        for(PrimaryBacterium bacter : _bacteriums){
             if (_playerBacterium!= null && bacter.intersect(_playerBacterium)) {
                 eatenList.add(naturalSelectionBetween(bacter,_playerBacterium));
             }
-            for(SimpleBacterium bacterOther : _bacteriums){
+            for(PrimaryBacterium bacterOther : _bacteriums){
                 if (bacter!= bacterOther && bacter.intersect(bacterOther)) {
                     eatenList.add(naturalSelectionBetween(bacter,bacterOther));
                 }
