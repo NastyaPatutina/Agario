@@ -7,7 +7,9 @@ package com.mygdx.gameworld;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.gameobjects.PlayerBacterium;
+import com.mygdx.gameobjects.PredatoryBacterium;
 import com.mygdx.gameobjects.PrimaryBacterium;
+import com.mygdx.gameobjects.Bifidobacterium;
 import com.mygdx.gameobjects.SimpleBacterium;
 import java.util.ArrayList;
 import java.util.Random;
@@ -31,7 +33,7 @@ public class GameWorld {
         currentState = GameState.READY;
         _playerBacterium = new PlayerBacterium(33, 40, 6, this);
         for(int i = 0; i < maxCountOfBacteriums; i++){
-            _bacteriums.add(new SimpleBacterium(this));
+            _bacteriums.add(new Bifidobacterium (this));
         }
     }
 
@@ -49,7 +51,7 @@ public class GameWorld {
     }
     
     private void updateReady(float delta) {
-        // Пока что ничего не делаем
+        //Ничего не делаем
     }
     private void updateRunning(float delta) {
         //Поедание
@@ -87,21 +89,28 @@ public class GameWorld {
         return false;
     }
     private PrimaryBacterium naturalSelectionBetween(PrimaryBacterium bacter, PrimaryBacterium other){
+        //TODO если один них хищник меньшегоо радиуса
         if (bacter.getRadius() > other.getRadius()) {
-            bacter.eat((int) other.getRadius());
-            return other;
+            if ( bacter instanceof PredatoryBacterium){
+                ((PredatoryBacterium )bacter).eat(other);
+                return other;
+            }
         } else {
-            other.eat((int) bacter.getRadius());
-            return bacter;
+            if ( bacter instanceof PredatoryBacterium){
+                ((PredatoryBacterium )other).eat(bacter);
+                return bacter;
+            }
         }
+        return null;
     }
+    
     private void createNewBacteriums(){
         int maxNewValue = maxCountOfBacteriums - _bacteriums.size();
         Random random = new Random();
         if (maxNewValue>0) {
             int addCount = random.nextInt() % maxNewValue;
             for(int i = 0; i < addCount; i++){
-                _bacteriums.add(new SimpleBacterium(this));
+                _bacteriums.add(new Bifidobacterium (this));
             }
         }
     }
@@ -141,7 +150,7 @@ public class GameWorld {
         _bacteriums.clear();
         _playerBacterium.setCircle(33, 40, 6);
         for(int i = 0; i < maxCountOfBacteriums; i++){
-            _bacteriums.add(new SimpleBacterium(this));
+            _bacteriums.add(new Bifidobacterium (this));
         }
     }
 

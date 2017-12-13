@@ -15,17 +15,17 @@ import java.util.Random;
  *
  * @author npatutina
  */
-public class Sarcina extends SimpleBacterium {
+public class Bifidobacterium extends SimpleBacterium {
     private final Random random = new Random();
     private int velocityMax = 8;
     
     int deffIteration;
     int iterationMax = 200;
     
-    public Sarcina(float x, float y, int radius, GameWorld world) {
+    public Bifidobacterium(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
     }
-    public Sarcina(GameWorld world) {
+    public Bifidobacterium(GameWorld world) {
         super();
         _world = world;
         do {
