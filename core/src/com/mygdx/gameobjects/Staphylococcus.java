@@ -5,6 +5,7 @@
  */
 package com.mygdx.gameobjects;
 
+import com.badlogic.gdx.graphics.Color;
 import com.mygdx.gameworld.GameWorld;
 
 /**
@@ -16,10 +17,19 @@ public class Staphylococcus extends SimpleBacterium implements ToxicBacterium  {
     public Staphylococcus(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
     }
+    public Staphylococcus(GameWorld world) {
+        super(world);
+         _color = Color.RED;
+
+    }
 
     @Override
     public void poison(PredatoryBacterium bacter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (bacter.radius > 3)
+            bacter.radius -=3;
+        
+        bacter.velocity.x --;        
+        bacter.velocity.y --;        
     }
 
     
