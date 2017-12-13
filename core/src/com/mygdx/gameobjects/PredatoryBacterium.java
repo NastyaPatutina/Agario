@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -26,8 +26,8 @@ public abstract class PredatoryBacterium extends PrimaryBacterium{
             ((ToxicBacterium)food).poison(this);
         } else{         
             radius += food.getRadius()/3;
-            if (radius > 20)
-                radius =20; 
+            if (radius > _world.screenHeight()/100)
+                radius =_world.screenHeight()/100; 
             diffVelocity = 15 - radius;
         }
     }

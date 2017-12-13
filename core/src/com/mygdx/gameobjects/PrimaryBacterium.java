@@ -16,23 +16,23 @@ import static java.lang.Math.pow;
  */
 public abstract class PrimaryBacterium { 
     
-    int diffVelocity;
+    float diffVelocity;
     Vector2 position;
     //private Vector2 acceleration;
     Vector2 velocity;
     GameWorld _world;
 
-    int radius;
+    float radius;
     Color _color;
 
     
-    public PrimaryBacterium(float x, float y, int radius, GameWorld world) {
+    public PrimaryBacterium(float x, float y, float radius, GameWorld world) {
         this.radius = radius;
         position = new Vector2(x, y);
         //acceleration = new Vector2(0, 460);
         velocity = new Vector2(0, 0);
         _world = world;
-        diffVelocity = 15 - radius;
+        diffVelocity = (int) (15 - radius);
     }
     
     PrimaryBacterium() {

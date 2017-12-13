@@ -24,13 +24,10 @@ public abstract class SimpleBacterium extends PrimaryBacterium {
         super();
         _world = world;
         do {
-           position.x = abs(random.nextInt() % 120);
-           position.y = abs(random.nextInt() % 120);
+           position.x = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
+           position.y = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
            radius = abs(random.nextInt() % maxRadius);
-        } while (_world.containsBacterium(position, radius + 5));
-           float r = abs(random.nextFloat());
-           float g = abs(random.nextFloat());
-           float b = abs(random.nextFloat());
+        } while (_world.containsBacterium(position, (int) (radius + 5)));
            diffVelocity = abs(velocityMax - radius);
     }
     
@@ -77,18 +74,6 @@ public abstract class SimpleBacterium extends PrimaryBacterium {
         if (velocity.y < -velocityMax)
             velocity.y = -velocityMax;
         position.add(velocity.cpy().scl(delta));
-   /*     if (position.x < 0 - radius){
-            position.x = 135 + radius;
-        }
-         if (position.y < 0- radius){
-            position.y = 135 + radius;
-         }
-         if (position.x > 135 +radius){
-            position.x = 0 - radius;
-         }
-         if (position.y > 135 + radius){
-            position.y = 0 - radius;
-         }*/
          
          
     }

@@ -91,7 +91,7 @@ public class GameRenderer {
             shapeRenderer.setColor(darkCircle);       
             shapeRenderer.circle(bacter.getX(), bacter.getY(), bacter.getRadius());
             shapeRenderer.setColor(bacter.getColor());
-            shapeRenderer.circle(bacter.getX(), bacter.getY(), bacter.getRadius() - 1);   
+            shapeRenderer.circle(bacter.getX(), bacter.getY(), (float) (bacter.getRadius() * 0.9));   
         }
         // Заканчиваем SpriteBatch
         shapeRenderer.end();     

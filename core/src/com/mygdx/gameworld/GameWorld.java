@@ -45,6 +45,14 @@ public class GameWorld {
         
     }
     
+    public float screenWidth(){
+        return _screenWidth;
+    }
+    
+    public float screenHeight(){
+        return _screenHeight;
+    }
+     
     void fillworld(){
         _bacteriums.add(new PlayerBacterium(33, 40, maxRadius, this));
         for(int i = 0; i < maxCountOfBacteriums/6; i++){
