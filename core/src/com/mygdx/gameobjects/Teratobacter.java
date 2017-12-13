@@ -11,9 +11,9 @@ import com.mygdx.gameworld.GameWorld;
  *
  * @author npatutina
  */
-public class Bdellovibrio extends PredatoryBacterium implements ProfitableBacterium{
+public class Teratobacter extends PredatoryBacterium implements ProfitableBacterium{
 
-    public Bdellovibrio(float x, float y, int radius, GameWorld world) {
+    public Teratobacter(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
     }
 
