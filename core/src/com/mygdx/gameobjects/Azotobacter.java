@@ -5,6 +5,7 @@
  */
 package com.mygdx.gameobjects;
 
+import com.badlogic.gdx.graphics.Color;
 import com.mygdx.gameworld.GameWorld;
 
 /**
@@ -16,20 +17,17 @@ public class Azotobacter extends SimpleBacterium implements ProfitableBacterium 
     public Azotobacter(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
     }
+    public Azotobacter(GameWorld world) {
+        super(world);
+         _color = Color.BLUE;
 
-    @Override
-    public void update(float delta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    float changeVelocity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public void improve(PredatoryBacterium bacter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        bacter.radius += 3;
+        bacter.velocity.x += 2;        
+        bacter.velocity.y += 2;
     }
     
 }
