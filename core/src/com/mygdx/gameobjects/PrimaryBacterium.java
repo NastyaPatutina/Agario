@@ -67,7 +67,7 @@ public abstract class PrimaryBacterium {
     }
         
     public boolean intersect(PrimaryBacterium other) {
-        if ((Math.pow((double)(position.x - other.position.x), 2) + Math.pow((double)(position.y - other.position.y), 2)) < Math.pow((double)(radius + other.radius), 2)) {
+        if (distance(other.getX(), other.getY()) < pow(pow((double)(radius + other.radius), 2), 0.5)) {
             return true;
         }
         return false;

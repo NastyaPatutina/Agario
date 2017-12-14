@@ -20,6 +20,7 @@ public abstract class SimpleBacterium extends PrimaryBacterium {
     public SimpleBacterium(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
     }    
+    
     public SimpleBacterium(GameWorld world, int maxRadius) {
         super();
         _world = world;
