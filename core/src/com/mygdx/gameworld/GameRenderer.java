@@ -37,6 +37,7 @@ public class GameRenderer {
     public GameRenderer(GameWorld world, int gameHeight) {
         myWorld = world;
         this.gameHeight = gameHeight;
+        myWorld.setGameHeight(gameHeight);
 
         cam = new OrthographicCamera();
         cam.setToOrtho(true, 136, gameHeight);

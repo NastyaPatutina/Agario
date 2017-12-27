@@ -35,7 +35,6 @@ public class InputHandler implements InputProcessor {
         if (_bacterium.getWorld().isGameOver()) {
             // Обнулим все перменные, перейдем в GameState.READ
             _bacterium.getWorld().restart();
-            System.out.println(_bacterium.getWorld().isReady());
         }
         return false;
     }

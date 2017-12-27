@@ -23,13 +23,14 @@ public abstract class BotBacterium extends PredatoryBacterium {
     public BotBacterium(GameWorld world, int maxRadius) {
         super();
         _world = world;
+        
         do {
            position.x = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
            position.y = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
            radius = abs(random.nextInt() % maxRadius);
-        } while (_world.containsBacterium(position, (int) (radius + 5)));
+        } while (_world.containsBacterium(position, (int) (radius + maxRadius/2)));
         
-           diffVelocity = abs(velocityMax - radius);
+        diffVelocity = abs(velocityMax - radius);
     }
     
     private int velocityMax = 8;
@@ -74,18 +75,6 @@ public abstract class BotBacterium extends PredatoryBacterium {
         if (velocity.y < -velocityMax)
             velocity.y = -velocityMax;
         position.add(velocity.cpy().scl(delta));
-   /*     if (position.x < 0 - radius){
-            position.x = 135 + radius;
-        }
-         if (position.y < 0- radius){
-            position.y = 135 + radius;
-         }
-         if (position.x > 135 +radius){
-            position.x = 0 - radius;
-         }
-         if (position.y > 135 + radius){
-            position.y = 0 - radius;
-         }*/
          
          
     }

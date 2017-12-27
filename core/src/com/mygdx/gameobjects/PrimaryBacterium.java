@@ -17,14 +17,15 @@ import static java.lang.Math.pow;
 public abstract class PrimaryBacterium { 
     
     float diffVelocity;
+    float maxVelocity = 200;
     Vector2 position;
     //private Vector2 acceleration;
     Vector2 velocity;
     GameWorld _world;
+    private float maxPossibleRadius;
 
     float radius;
     Color _color;
-
     
     public PrimaryBacterium(float x, float y, float radius, GameWorld world) {
         this.radius = radius;
@@ -32,6 +33,7 @@ public abstract class PrimaryBacterium {
         //acceleration = new Vector2(0, 460);
         velocity = new Vector2(0, 0);
         _world = world;
+        maxPossibleRadius= _world.screenWidth() / 40;
         diffVelocity = (int) (15 - radius);
     }
     
@@ -58,6 +60,24 @@ public abstract class PrimaryBacterium {
         return radius;
     }
     
+    public float getMaxRadius() {
+        return maxPossibleRadius;
+    }
+    
+    public void addRadius(float incriment) {
+        if ( radius + incriment < maxPossibleRadius)
+            radius += incriment;
+        else
+            radius = maxPossibleRadius;
+    }
+    
+    public void lowRadius(float derciment) {
+        if ( radius - derciment > 0)
+            radius -= derciment;
+        else
+            radius = 1;
+    }
+    
     public GameWorld getWorld() {
         return _world;
     }
@@ -67,7 +87,7 @@ public abstract class PrimaryBacterium {
     }
         
     public boolean intersect(PrimaryBacterium other) {
-        if (distance(other.getX(), other.getY()) < pow(pow((double)(radius + other.radius), 2), 0.5)) {
+        if (distance(other.getX(), other.getY()) < pow(pow((double)(radius + other.getRadius()), 2), 0.5)) {
             return true;
         }
         return false;
