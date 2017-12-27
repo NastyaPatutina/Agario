@@ -42,7 +42,7 @@ public class GameWorld {
         currentState = GameState.READY;
         _screenWidth = screenWidth;
         _screenHeight = screenHeight;
-        maxCountOfBacteriums = (int) ((screenHeight * screenWidth)/pow(maxRadius * 10, 2));
+        maxCountOfBacteriums = (int) ((screenHeight * screenWidth)/pow(10 * 10, 2));
         fillworld();
         
     }

@@ -27,7 +27,7 @@ public abstract class SimpleBacterium extends PrimaryBacterium {
         do {
            position.x = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
            position.y = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
-           radius = abs(random.nextInt() % maxRadius);
+           radius = abs(random.nextInt() % maxRadius) + 1;
         } while (_world.containsBacterium(position, (int) (radius + 5)));
            diffVelocity = abs(velocityMax - radius);
     }
@@ -40,32 +40,26 @@ public abstract class SimpleBacterium extends PrimaryBacterium {
     
     @Override
     public void update(float delta) {
-        if (deffIteration < 0) {
-            switch (abs(random.nextInt()) % velocityMax){
-                case 0:
-                    velocity.x = changeVelocity();
-                    break;
-                case 1:
-                    velocity.x = - changeVelocity();
-                    break;
-                case 2:
-                    velocity.y = changeVelocity();
-                    break;
-                case 3:
-                    velocity.y = - changeVelocity();
-                    break;
-                case 4:
-                    //velocity.x = 0;
-                    break;
-                case 5:
-                    //velocity.y = 0;
-                    break;
-                default:
-                    break;
+        PredatoryBacterium dangerBacter  = _world.getNearestPredatoryBacterium(this);
+        
+        if (dangerBacter != null) {
+            if (dangerBacter.getX() > position.x) {
+                velocity.x = - changeVelocity();
+            } else if (dangerBacter.getX() < position.x) {
+                velocity.x = changeVelocity();
+            } else {
+                velocity.x = 0;
             }
-            deffIteration = 0;
+
+            if (dangerBacter.getY() > position.y) {
+                velocity.y = - changeVelocity();
+            } else if (dangerBacter.getX() < position.y) {
+                velocity.y = changeVelocity();
+            } else {
+                velocity.y = 0;
+            }
         }
-        deffIteration = iterationMax;
+        
         if (velocity.x > velocityMax)
             velocity.x = velocityMax;
         if (velocity.y > velocityMax)
@@ -74,13 +68,15 @@ public abstract class SimpleBacterium extends PrimaryBacterium {
             velocity.x  = -velocityMax;
         if (velocity.y < -velocityMax)
             velocity.y = -velocityMax;
-        position.add(velocity.cpy().scl(delta));
+        
+        position.x += velocity.cpy().x;
+        position.y += velocity.cpy().y;
          
          
     }
 
     @Override
     float changeVelocity() {
-        return (float) exp((diffVelocity)*radius/5);
+        return (float)(getMaxRadius() - radius + 1)/maxVelocity;
     }
 }

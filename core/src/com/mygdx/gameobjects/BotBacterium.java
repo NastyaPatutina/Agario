@@ -27,61 +27,64 @@ public abstract class BotBacterium extends PredatoryBacterium {
         do {
            position.x = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
            position.y = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
-           radius = abs(random.nextInt() % maxRadius);
+           radius = abs(random.nextInt() % maxRadius) + 1;
         } while (_world.containsBacterium(position, (int) (radius + maxRadius/2)));
         
-        diffVelocity = abs(velocityMax - radius);
+        setMaxRadius(_world.screenWidth() / 50);
+        diffVelocity = abs(maxVelocity - radius);
     }
     
-    private int velocityMax = 8;
-    int iterationMax = 200;
-    int deffIteration;
+    int diffIteration;
     final Random random = new Random();
     
     @Override
     public void update(float delta) {
-        if (deffIteration < 0) {
-            switch (abs(random.nextInt()) % velocityMax){
-                case 0:
-                    velocity.x = changeVelocity();
-                    break;
-                case 1:
-                    velocity.x = - changeVelocity();
-                    break;
-                case 2:
-                    velocity.y = changeVelocity();
-                    break;
-                case 3:
-                    velocity.y = - changeVelocity();
-                    break;
-                case 4:
-                    //velocity.x = 0;
-                    break;
-                case 5:
-                    //velocity.y = 0;
-                    break;
-                default:
-                    break;
+        
+        SimpleBacterium food  = _world.getNearestSimpleBacterium(this);
+        
+        if (food != null) {
+            if (food.getX() > position.x) {
+                velocity.x = changeVelocity();
+            } else if (food.getX() < position.x) {
+                velocity.x = -changeVelocity();
+            } else {
+                velocity.x = 0;
             }
-            deffIteration = 0;
+
+            if (food.getY() > position.y) {
+                velocity.y = changeVelocity();
+            } else if (food.getX() < position.y) {
+                velocity.y = -changeVelocity();
+            } else {
+                velocity.y = 0;
+            }
         }
-        deffIteration = iterationMax;
-        if (velocity.x > velocityMax)
-            velocity.x = velocityMax;
-        if (velocity.y > velocityMax)
-            velocity.y = velocityMax;
-        if (velocity.x < -velocityMax)
-            velocity.x  = -velocityMax;
-        if (velocity.y < -velocityMax)
-            velocity.y = -velocityMax;
-        position.add(velocity.cpy().scl(delta));
+        
+        if (velocity.x > maxVelocity)
+            velocity.x = maxVelocity;
+        if (velocity.y > maxVelocity)
+            velocity.y = maxVelocity;
+        if (velocity.x < -maxVelocity)
+            velocity.x  = -maxVelocity;
+        if (velocity.y < -maxVelocity)
+            velocity.y = -maxVelocity;
+        
+        position.x += velocity.cpy().x;
+        position.y += velocity.cpy().y;
          
          
     }
 
     @Override
     float changeVelocity() {
-        return (float) exp((diffVelocity)*radius/5);
+        System.out.println("bacter");
+        System.out.println((float)(getMaxRadius() - radius + 1)/maxVelocity);        
+        System.out.println(radius);        
+        System.out.println(getMaxRadius());
+
+        System.out.println(maxVelocity);
+
+        return (float)(getMaxRadius() - radius + 1)/maxVelocity;
     }
     
 }

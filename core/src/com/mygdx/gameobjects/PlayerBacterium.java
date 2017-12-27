@@ -29,9 +29,6 @@ public class PlayerBacterium extends PredatoryBacterium{
     
     @Override
     public void update(float delta) {
-        //velocity.add(acceleration.cpy().scl(delta));
-        System.out.println("");         
-        System.out.println("update"); 
 
         System.out.println(velocity.cpy()); 
 
@@ -44,8 +41,6 @@ public class PlayerBacterium extends PredatoryBacterium{
         
         position.x += velocity.cpy().x;
         position.y += velocity.cpy().y;
-        System.out.println(velocity.cpy()); 
-
         
         if (position.x < 0){
             position.x = _world.getGameWidth();
@@ -126,8 +121,13 @@ public class PlayerBacterium extends PredatoryBacterium{
     }
 
     @Override
-    float changeVelocity() {
-        System.out.println("changeVelocity");        
+    float changeVelocity() {      
+        System.out.println("");              
+        System.out.println("player");        
+  
+        System.out.println((float)(getMaxRadius() - radius + 1)/maxVelocity);        
+        System.out.println(getMaxRadius() - radius);
+        System.out.println(maxVelocity);
         return (float)(getMaxRadius() - radius + 1)/maxVelocity ;
     }
 }

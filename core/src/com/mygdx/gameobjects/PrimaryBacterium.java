@@ -64,6 +64,10 @@ public abstract class PrimaryBacterium {
         return maxPossibleRadius;
     }
     
+    public void setMaxRadius(float maxRedius) {
+        maxPossibleRadius = maxRedius;
+    }
+    
     public void addRadius(float incriment) {
         if ( radius + incriment < maxPossibleRadius)
             radius += incriment;
