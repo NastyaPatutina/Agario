@@ -24,52 +24,57 @@ public class PlayerBacterium extends PredatoryBacterium{
     public PlayerBacterium(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
         _color = Color.GOLD;
-        diffVelocity = 3;
+        diffVelocity = 2;
     }
     
     @Override
     public void update(float delta) {
         //velocity.add(acceleration.cpy().scl(delta));
+        System.out.println("");         
+        System.out.println("update"); 
 
-        if (velocity.y > 200) {
-            velocity.y = 200;
+        System.out.println(velocity.cpy()); 
+
+        if (velocity.cpy().y > maxVelocity) {
+            velocity.cpy().y = maxVelocity;
         }
-        if (velocity.x > 200) {
-            velocity.x = 200;
-        }
-        if (abs(velocity.x) < 1) {
-            velocity.x*=3;
-        }
-        if (abs(velocity.y) < 1) {
-            velocity.y*=3;
+        if (velocity.cpy().x > maxVelocity) {
+            velocity.cpy().x = maxVelocity;
         }
         
-        position.add(velocity.cpy().scl(delta));
-        System.out.println(velocity);
+        position.x += velocity.cpy().x;
+        position.y += velocity.cpy().y;
+        System.out.println(velocity.cpy()); 
+
+        
         if (position.x < 0){
-            position.x = 135;
+            position.x = _world.getGameWidth();
         }
          if (position.y < 0){
-            position.y = 135;
+            position.y = _world.getGameHeight();
          }
-         if (position.x > 135){
+         if (position.x > _world.getGameWidth()){
             position.x = 0;
          }
-         if (position.y > 135){
+         if (position.y > _world.getGameHeight()){
             position.y = 0;
          }
     }
 
     private void right() {
+        System.out.println("right");  
         velocity.x = changeVelocity();
     }
     private void left() {
-        velocity.x = - changeVelocity();        
+        System.out.println("left");  
+        velocity.x = - changeVelocity();  
     }
     private void up() {
+        System.out.println("up");  
         velocity.y = - changeVelocity();
     }
     private void down() {
+        System.out.println("down");  
         velocity.y = changeVelocity();
     }
     
@@ -122,6 +127,7 @@ public class PlayerBacterium extends PredatoryBacterium{
 
     @Override
     float changeVelocity() {
-        return (float)(2 +  exp((diffVelocity)*radius/10));
+        System.out.println("changeVelocity");        
+        return (float)(getMaxRadius() - radius + 1)/maxVelocity ;
     }
 }

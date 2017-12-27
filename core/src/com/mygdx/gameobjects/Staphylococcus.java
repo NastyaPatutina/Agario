@@ -25,11 +25,9 @@ public class Staphylococcus extends SimpleBacterium implements ToxicBacterium  {
 
     @Override
     public void poison(PredatoryBacterium bacter) {
-        if (bacter.radius > 3)
-            bacter.radius -=3;
-        
-        bacter.velocity.x --;        
-        bacter.velocity.y --;        
+        bacter.lowRadius(this.getRadius());
+       // bacter.velocity.x --;        
+       // bacter.velocity.y --;        
     }
 
     

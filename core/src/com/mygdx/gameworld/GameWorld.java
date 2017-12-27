@@ -29,7 +29,9 @@ public class GameWorld {
     private GameState currentState;
     float _screenWidth;
     float _screenHeight;
-    int maxRadius = 7;
+    int maxRadius = 7;    
+    float _gameHeight;
+    
     public enum GameState {
         READY, RUNNING, GAMEOVER
     }
@@ -44,7 +46,18 @@ public class GameWorld {
         fillworld();
         
     }
+  
+    public void setGameHeight(float gameHieght){
+        _gameHeight = gameHieght;
+    }
     
+    public float getGameHeight(){
+        return _gameHeight;
+    }
+ 
+    public float getGameWidth(){
+        return _screenHeight / (_screenWidth / _gameHeight);
+    }
     public float screenWidth(){
         return _screenWidth;
     }
