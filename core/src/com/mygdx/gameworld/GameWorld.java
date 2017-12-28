@@ -83,7 +83,7 @@ public class GameWorld {
         return 1;
     }
      
-    void fillworld(){
+    private void fillworld(){
         _bacteriums.add(new PlayerBacterium(33, 40, maxRadius, this));
         for(int i = 0; i < maxCountOfBacteriums/6; i++){
             _bacteriums.add(new Bifidobacterium (this, maxRadius));
@@ -102,7 +102,7 @@ public class GameWorld {
         }
     }
     
-    void generateAreas(){
+    private void generateAreas(){
         _areas.add(new StaticArea (new Rectangle(0,             0,                  getGameWidth()/2,     getGameHeight()/2)));        
         _areas.add(new LowArea (new Rectangle   (getGameWidth()/2,   getGameHeight()/2, getGameWidth()/2,     getGameHeight()/2)));
         _areas.add(new FastArea (new Rectangle  (0,                getGameHeight()/2, getGameWidth()/2,     getGameHeight()/2)));

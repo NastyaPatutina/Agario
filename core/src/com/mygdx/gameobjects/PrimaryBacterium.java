@@ -16,7 +16,6 @@ import static java.lang.Math.pow;
  */
 public abstract class PrimaryBacterium { 
     
-    float diffVelocity;
     float maxVelocity = 200;
     Vector2 position;
     //private Vector2 acceleration;
@@ -34,7 +33,6 @@ public abstract class PrimaryBacterium {
         velocity = new Vector2(0, 0);
         _world = world;
         maxPossibleRadius= _world.screenWidth() / 40;
-        diffVelocity = (int) (15 - radius);
     }
     
     PrimaryBacterium() {
@@ -108,6 +106,8 @@ public abstract class PrimaryBacterium {
         this.radius = radius;
         position = new Vector2(x, y);
     }
-    abstract float changeVelocity ();
+    float changeVelocity (){
+        return (float)(getMaxRadius() - radius + 1)/maxVelocity * _world.getVelocityMod(this);
+    }
     
 }

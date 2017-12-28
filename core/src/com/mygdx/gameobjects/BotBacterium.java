@@ -31,7 +31,6 @@ public abstract class BotBacterium extends PredatoryBacterium {
         } while (_world.containsBacterium(position, (int) (radius + maxRadius/2)));
         
         setMaxRadius(_world.screenWidth() / 50);
-        diffVelocity = abs(maxVelocity - radius);
     }
     
     int diffIteration;
@@ -73,18 +72,5 @@ public abstract class BotBacterium extends PredatoryBacterium {
         position.y += velocity.cpy().y;
          
          
-    }
-
-    @Override
-    float changeVelocity() {
-        System.out.println("bacter");
-        System.out.println((float)(getMaxRadius() - radius + 1)/maxVelocity);        
-        System.out.println(radius);        
-        System.out.println(getMaxRadius());
-
-        System.out.println(maxVelocity);
-
-        return (float)(getMaxRadius() - radius + 1)/maxVelocity * _world.getVelocityMod(this);
-    }
-    
+    }    
 }

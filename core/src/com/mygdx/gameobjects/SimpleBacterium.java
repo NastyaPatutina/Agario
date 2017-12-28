@@ -29,7 +29,6 @@ public abstract class SimpleBacterium extends PrimaryBacterium {
            position.y = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
            radius = abs(random.nextInt() % maxRadius) + 1;
         } while (_world.containsBacterium(position, (int) (radius + 5)));
-           diffVelocity = abs(velocityMax - radius);
     }
     
     private int velocityMax = 8;
@@ -75,8 +74,4 @@ public abstract class SimpleBacterium extends PrimaryBacterium {
          
     }
 
-    @Override
-    float changeVelocity() {
-        return (float)(getMaxRadius() - radius + 1)/maxVelocity * _world.getVelocityMod(this);
-    }
 }

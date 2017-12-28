@@ -24,7 +24,6 @@ public class PlayerBacterium extends PredatoryBacterium{
     public PlayerBacterium(float x, float y, int radius, GameWorld world) {
         super(x, y, radius, world);
         _color = Color.GOLD;
-        diffVelocity = 2;
     }
     
     @Override
@@ -118,10 +117,5 @@ public class PlayerBacterium extends PredatoryBacterium{
                         downLow();
                         break;
             }
-    }
-
-    @Override
-    float changeVelocity() {      
-        return (float)(getMaxRadius() - radius + 1)/maxVelocity  * _world.getVelocityMod(this);
     }
 }
