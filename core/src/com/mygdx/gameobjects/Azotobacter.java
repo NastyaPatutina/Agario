@@ -25,9 +25,7 @@ public class Azotobacter extends SimpleBacterium implements ProfitableBacterium 
     
     @Override
     public void improve(PredatoryBacterium bacter) {
-        bacter.addRadius(this.getRadius());
-      //  bacter.velocity.x += 2;        
-      //  bacter.velocity.y += 2;
+        bacter.addRadius(this.getRadius()/2);
     }
     
 }

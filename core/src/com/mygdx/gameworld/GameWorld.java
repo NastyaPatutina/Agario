@@ -139,24 +139,30 @@ public class GameWorld {
     }
     private PrimaryBacterium naturalSelectionBetween(PrimaryBacterium bacter, PrimaryBacterium other){
         //TODO если один них хищник меньшегоо радиуса
-        if(bacter instanceof PredatoryBacterium && other instanceof SimpleBacterium) {
-            ((PredatoryBacterium )bacter).eat(other);
-            return other;
-        }
-        if(other instanceof PredatoryBacterium && bacter instanceof SimpleBacterium){
-            ((PredatoryBacterium )other).eat(bacter);
-            return bacter;
-        }
+        if(bacter instanceof PredatoryBacterium && other instanceof SimpleBacterium)
+                if(bacter.getRadius() > other.getRadius()) {
+                    ((PredatoryBacterium )bacter).eat(other);
+                    return other;
+                } else {
+                    return null;
+                }
+        
+        if(other instanceof PredatoryBacterium && bacter instanceof SimpleBacterium)
+                if(bacter.getRadius() <= other.getRadius()){
+                    ((PredatoryBacterium )other).eat(bacter);
+                    return bacter;
+                } else {
+                    return null;
+                }
+        
         if (other instanceof SimpleBacterium && bacter instanceof SimpleBacterium)
             return null;
-        
-        if (bacter.getRadius() > other.getRadius()) {
-            if ( bacter instanceof PredatoryBacterium){
+        if (other instanceof PredatoryBacterium && bacter instanceof PredatoryBacterium){
+            if (bacter.getRadius() > other.getRadius()) {
                 ((PredatoryBacterium )bacter).eat(other);
                 return other;
-            }
-        } else {
-            if ( bacter instanceof PredatoryBacterium){
+         
+            } else {
                 ((PredatoryBacterium )other).eat(bacter);
                 return bacter;
             }
@@ -193,7 +199,7 @@ public class GameWorld {
         ArrayList<PrimaryBacterium> eatenList = new ArrayList();
         for(PrimaryBacterium bacter : _bacteriums){
             for(PrimaryBacterium bacterOther : _bacteriums){
-                if (bacter!= bacterOther && bacter.intersect(bacterOther)) {
+                if (bacter!= bacterOther && bacter.intersect(bacterOther) && !eatenList.contains(bacter) && !eatenList.contains(bacterOther)) {
                     eatenList.add(naturalSelectionBetween(bacter,bacterOther));
                 }
             }
@@ -244,7 +250,7 @@ public class GameWorld {
        SimpleBacterium minBacter = null;
 
        for(PrimaryBacterium bacter : _bacteriums) {
-            if(bacter instanceof SimpleBacterium && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)){
+            if(bacter instanceof SimpleBacterium && bacter.getRadius() <= currentBacter.getRadius() && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)){
                 minBacter = (SimpleBacterium) bacter;
                 minDistance = currentBacter.distance(bacter.getX(), bacter.getY());
             }
