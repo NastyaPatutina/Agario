@@ -122,12 +122,6 @@ public class PlayerBacterium extends PredatoryBacterium{
 
     @Override
     float changeVelocity() {      
-        System.out.println("");              
-        System.out.println("player");        
-  
-        System.out.println((float)(getMaxRadius() - radius + 1)/maxVelocity);        
-        System.out.println(getMaxRadius() - radius);
-        System.out.println(maxVelocity);
-        return (float)(getMaxRadius() - radius + 1)/maxVelocity ;
+        return (float)(getMaxRadius() - radius + 1)/maxVelocity  * _world.getVelocityMod(this);
     }
 }

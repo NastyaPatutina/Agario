@@ -84,7 +84,7 @@ public abstract class BotBacterium extends PredatoryBacterium {
 
         System.out.println(maxVelocity);
 
-        return (float)(getMaxRadius() - radius + 1)/maxVelocity;
+        return (float)(getMaxRadius() - radius + 1)/maxVelocity * _world.getVelocityMod(this);
     }
     
 }

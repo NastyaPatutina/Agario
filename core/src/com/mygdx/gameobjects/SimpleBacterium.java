@@ -77,6 +77,6 @@ public abstract class SimpleBacterium extends PrimaryBacterium {
 
     @Override
     float changeVelocity() {
-        return (float)(getMaxRadius() - radius + 1)/maxVelocity;
+        return (float)(getMaxRadius() - radius + 1)/maxVelocity * _world.getVelocityMod(this);
     }
 }

@@ -5,6 +5,7 @@
  */
 package com.mygdx.gameworld;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.gameobjects.Azotobacter;
 import com.mygdx.gameobjects.PlayerBacterium;
@@ -15,6 +16,12 @@ import com.mygdx.gameobjects.Salmonella;
 import com.mygdx.gameobjects.SimpleBacterium;
 import com.mygdx.gameobjects.Staphylococcus;
 import com.mygdx.gameobjects.Teratobacter;
+import com.mygdx.gameworld.areas.Area;
+import com.mygdx.gameworld.areas.DinamicArea;
+import com.mygdx.gameworld.areas.FastArea;
+import com.mygdx.gameworld.areas.LowArea;
+import com.mygdx.gameworld.areas.MirrorArea;
+import com.mygdx.gameworld.areas.StaticArea;
 import static java.lang.Math.pow;
 import java.util.ArrayList;
 import java.util.Random;
@@ -30,25 +37,26 @@ public class GameWorld {
     float _screenWidth;
     float _screenHeight;
     int maxRadius = 7;    
-    float _gameHeight;
-    
+    float _gameHeight;    
     public enum GameState {
         READY, RUNNING, GAMEOVER
     }
-    private ArrayList<PrimaryBacterium> _bacteriums = new ArrayList();
+    private ArrayList<PrimaryBacterium> _bacteriums = new ArrayList();    
+    private ArrayList<Area> _areas = new ArrayList();
     int maxCountOfBacteriums;
     
     public GameWorld(float screenWidth, float screenHeight) {
         currentState = GameState.READY;
         _screenWidth = screenWidth;
         _screenHeight = screenHeight;
-        maxCountOfBacteriums = (int) ((screenHeight * screenWidth)/pow(10 * 10, 2));
+        maxCountOfBacteriums = (int) ((screenHeight * screenWidth)/pow(screenHeight/5, 2));
         fillworld();
         
     }
   
     public void setGameHeight(float gameHieght){
         _gameHeight = gameHieght;
+        generateAreas();
     }
     
     public float getGameHeight(){
@@ -64,6 +72,15 @@ public class GameWorld {
     
     public float screenHeight(){
         return _screenHeight;
+    }
+    
+    public float getVelocityMod(PrimaryBacterium bacter){
+        for(Area area : _areas) {
+            if (area instanceof DinamicArea && area.getRectangle().contains(bacter.getX(), bacter.getY())){
+                return ((DinamicArea)area).getModificationVelocity();
+            }           
+        }
+        return 1;
     }
      
     void fillworld(){
@@ -83,6 +100,13 @@ public class GameWorld {
         for(int i = 0; i < maxCountOfBacteriums/6; i++){
             _bacteriums.add(new Salmonella (this, maxRadius));
         }
+    }
+    
+    void generateAreas(){
+        _areas.add(new StaticArea (new Rectangle(0,             0,                  getGameWidth()/2,     getGameHeight()/2)));        
+        _areas.add(new LowArea (new Rectangle   (getGameWidth()/2,   getGameHeight()/2, getGameWidth()/2,     getGameHeight()/2)));
+        _areas.add(new FastArea (new Rectangle  (0,                getGameHeight()/2, getGameWidth()/2,     getGameHeight()/2)));
+        _areas.add(new MirrorArea (new Rectangle(getGameWidth()/2, 0,                 getGameWidth()/2,     getGameHeight()/2)));
     }
 
     public void update(float delta) {
@@ -122,6 +146,11 @@ public class GameWorld {
 
     }
 
+    public ArrayList<Area> getAreas() {
+        return _areas;
+
+    }
+    
     public PlayerBacterium getPlayerBacterium() {
         for(PrimaryBacterium bacter : _bacteriums) {
             if(bacter instanceof PlayerBacterium)
@@ -225,7 +254,9 @@ public class GameWorld {
     public void restart() {
         currentState = GameState.READY;
         _bacteriums.clear();
+        _areas.clear();
         fillworld();
+        generateAreas();
     }
 
     public boolean isGameOver() {
