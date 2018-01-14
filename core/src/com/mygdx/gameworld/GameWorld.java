@@ -7,15 +7,14 @@ package com.mygdx.gameworld;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.gameobjects.Azotobacter;
+import com.mygdx.gameobjects.BotBacterium;
 import com.mygdx.gameobjects.PlayerBacterium;
 import com.mygdx.gameobjects.PredatoryBacterium;
 import com.mygdx.gameobjects.PrimaryBacterium;
-import com.mygdx.gameobjects.Bifidobacterium;
-import com.mygdx.gameobjects.Salmonella;
 import com.mygdx.gameobjects.SimpleBacterium;
-import com.mygdx.gameobjects.Staphylococcus;
-import com.mygdx.gameobjects.Teratobacter;
+import com.mygdx.gameobjects.connect.Improves;
+import com.mygdx.gameobjects.connect.MultiImproves;
+import com.mygdx.gameobjects.connect.Toxic;
 import com.mygdx.gameworld.areas.Area;
 import com.mygdx.gameworld.areas.DinamicArea;
 import com.mygdx.gameworld.areas.FastArea;
@@ -85,20 +84,23 @@ public class GameWorld {
      
     private void fillworld(){
         _bacteriums.add(new PlayerBacterium(33, 40, maxRadius, this));
-        for(int i = 0; i < maxCountOfBacteriums/6; i++){
-            _bacteriums.add(new Bifidobacterium (this, maxRadius));
+        for(int i = 0; i < maxCountOfBacteriums/7; i++){
+            _bacteriums.add(new SimpleBacterium(new Improves(), this, maxRadius));
         }
-        for(int i = 0; i < maxCountOfBacteriums/6; i++){
-            _bacteriums.add(new Staphylococcus (this, maxRadius));
+        for(int i = 0; i < maxCountOfBacteriums/7; i++){
+            _bacteriums.add(new SimpleBacterium(new Toxic(), this, maxRadius));
         }
-        for(int i = 0; i < maxCountOfBacteriums/6; i++){
-            _bacteriums.add(new Azotobacter (this, maxRadius));
+        for(int i = 0; i < maxCountOfBacteriums/7; i++){
+            _bacteriums.add(new SimpleBacterium(new MultiImproves(), this, maxRadius));
         }
-        for(int i = 0; i < maxCountOfBacteriums/6; i++){
-            _bacteriums.add(new Teratobacter (this, maxRadius));
+        for(int i = 0; i < maxCountOfBacteriums/7; i++){
+            _bacteriums.add(new BotBacterium(new Improves(), this, maxRadius));
         }
-        for(int i = 0; i < maxCountOfBacteriums/6; i++){
-            _bacteriums.add(new Salmonella (this, maxRadius));
+        for(int i = 0; i < maxCountOfBacteriums/7; i++){
+            _bacteriums.add(new BotBacterium(new Toxic(), this, maxRadius));
+        }
+        for(int i = 0; i < maxCountOfBacteriums/7; i++){
+            _bacteriums.add(new BotBacterium(new MultiImproves(), this, maxRadius));
         }
     }
     
@@ -206,19 +208,22 @@ public class GameWorld {
             int addCount = random.nextInt() % maxNewValue;
             for(int i = 0; i < addCount; i++){
                 if (random.nextInt()%3 == 0){
-                    _bacteriums.add(new Bifidobacterium (this, maxRadius));
+                    _bacteriums.add(new SimpleBacterium(new Improves(), this, maxRadius));
                 }
                 if (random.nextInt()%7 == 0){
-                    _bacteriums.add(new Azotobacter (this, maxRadius));
+                    _bacteriums.add(new SimpleBacterium(new MultiImproves(), this, maxRadius));
                 }
                 if (random.nextInt()%7 == 0){
-                    _bacteriums.add(new Staphylococcus (this, maxRadius));
+                    _bacteriums.add(new SimpleBacterium(new Toxic(), this, maxRadius));
                 }
                 if (random.nextInt()%2 == 0){
-                    _bacteriums.add(new Salmonella (this, maxRadius));
+                    _bacteriums.add(new BotBacterium(new Improves(), this, maxRadius));
                 }
                 if (random.nextInt()%2 == 0){
-                    _bacteriums.add(new Teratobacter (this, maxRadius));
+                    _bacteriums.add(new BotBacterium(new Toxic(), this, maxRadius));
+                }
+                if (random.nextInt()%2 == 0){
+                    _bacteriums.add(new BotBacterium(new MultiImproves(), this, maxRadius));
                 }
             }
         }

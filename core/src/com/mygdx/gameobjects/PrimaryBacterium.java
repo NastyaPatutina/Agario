@@ -7,6 +7,7 @@ package com.mygdx.gameobjects;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.gameobjects.connect.Changing;
 import com.mygdx.gameworld.GameWorld;
 import static java.lang.Math.pow;
 
@@ -19,6 +20,7 @@ public abstract class PrimaryBacterium {
     float maxVelocity = 200;
     Vector2 position;
     //private Vector2 acceleration;
+    Changing _connection;
     Vector2 velocity;
     GameWorld _world;
     private float maxPossibleRadius;
@@ -26,17 +28,18 @@ public abstract class PrimaryBacterium {
     float radius;
     Color _color;
     
-    public PrimaryBacterium(float x, float y, float radius, GameWorld world) {
+    public PrimaryBacterium(Changing connection, float x, float y, float radius, GameWorld world) {
         this.radius = radius;
+        _connection = connection;
         position = new Vector2(x, y);
-        //acceleration = new Vector2(0, 460);
         velocity = new Vector2(0, 0);
         _world = world;
         maxPossibleRadius= _world.screenWidth() / 40;
     }
     
-    PrimaryBacterium() {
+    PrimaryBacterium(Changing connection) {
         this.radius = 0;
+        _connection = connection;
         position = new Vector2(0, 0);
         velocity = new Vector2(0, 0);
     }
@@ -108,6 +111,10 @@ public abstract class PrimaryBacterium {
     }
     float changeVelocity (){
         return (float)(getMaxRadius() - radius + 1)/maxVelocity * _world.getVelocityMod(this);
+    }
+    
+    void change(PredatoryBacterium other) {
+        _connection.changeRadius(other, this.getRadius()/3);
     }
     
 }

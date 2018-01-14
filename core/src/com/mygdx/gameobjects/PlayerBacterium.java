@@ -8,6 +8,7 @@ package com.mygdx.gameobjects;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.gameobjects.connect.Improves;
 import com.mygdx.gameworld.GameWorld;
 import static java.lang.Math.abs;
 import static java.lang.Math.exp;
@@ -22,7 +23,7 @@ public class PlayerBacterium extends PredatoryBacterium{
     private String nameUser = "User";
     
     public PlayerBacterium(float x, float y, int radius, GameWorld world) {
-        super(x, y, radius, world);
+        super(new Improves(), x, y, radius, world);
         _color = Color.GOLD;
     }
     

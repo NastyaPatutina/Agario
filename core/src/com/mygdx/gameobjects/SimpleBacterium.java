@@ -6,6 +6,10 @@
 package com.mygdx.gameobjects;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.gameobjects.connect.Changing;
+import com.mygdx.gameobjects.connect.Improves;
+import com.mygdx.gameobjects.connect.MultiImproves;
+import com.mygdx.gameobjects.connect.Toxic;
 import com.mygdx.gameworld.GameWorld;
 import static java.lang.Math.abs;
 import static java.lang.Math.exp;
@@ -16,14 +20,22 @@ import java.util.Random;
  *
  * @author npatutina
  */
-public abstract class SimpleBacterium extends PrimaryBacterium {
-    public SimpleBacterium(float x, float y, int radius, GameWorld world) {
-        super(x, y, radius, world);
+public class SimpleBacterium extends PrimaryBacterium {
+    public SimpleBacterium(Changing connection, float x, float y, int radius, GameWorld world) {
+        super(connection, x, y, radius, world);
     }    
     
-    public SimpleBacterium(GameWorld world, int maxRadius) {
-        super();
+    public SimpleBacterium(Changing connection, GameWorld world, int maxRadius) {
+        super(connection);
         _world = world;
+        
+        if (connection instanceof Improves){
+            _color = Color.WHITE;
+        } else if (connection instanceof MultiImproves) {
+            _color = Color.LIME;            
+        }else if (connection instanceof Toxic) {
+            _color = Color.RED;            
+        }
         do {
            position.x = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
            position.y = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
