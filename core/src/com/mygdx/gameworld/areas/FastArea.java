@@ -23,5 +23,5 @@ public class FastArea extends DinamicArea {
     public float getModificationVelocity() {
         return 2;
     }
-    
+
 }

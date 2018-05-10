@@ -28,7 +28,7 @@ import static javax.swing.Spring.height;
 public class GameRenderer {
 
     private GameWorld myWorld;
-    
+
     private OrthographicCamera cam;
     private ShapeRenderer shapeRenderer;
 
@@ -48,19 +48,19 @@ public class GameRenderer {
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(cam.combined);
     }
-    
-    public GameWorld getGameWorld(){
+
+    public GameWorld getGameWorld() {
         return myWorld;
     }
 
     public void render() {
         // мы уберем это из цикла далее, для улучшения производительности
-        ArrayList<PrimaryBacterium> bacteriums = myWorld.getBacteriums();        
+        ArrayList<PrimaryBacterium> bacteriums = myWorld.getBacteriums();
         ArrayList<Area> areas = myWorld.getAreas();
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
+
         // Стартуем ShapeRenderer
         shapeRenderer.begin(ShapeType.Filled);
 
@@ -70,34 +70,33 @@ public class GameRenderer {
         // Заканчиваем ShapeRenderer
         shapeRenderer.end();
         // Стартуем SpriteBatch
-       
+
         batcher.begin();
         // Отменим прозрачность
         // Это хорошо для производительности, когда отрисовываем картинки без прозрачности
         batcher.disableBlending();
         batcher.draw(AssetLoader.bg, 0, 0, 1500, 1500);
 
-
-        batcher.end(); 
+        batcher.end();
         shapeRenderer.begin(ShapeType.Filled);
-        
-        for(Area area : areas) {  
-            Color ligthColor  = new Color(area.getColor().r + (float)0.75, area.getColor().g + (float)0.75, area.getColor().b + (float)0.75, area.getColor().a + (float)0.75);    
-            shapeRenderer.setColor(ligthColor);      
+
+        for (Area area : areas) {
+            Color ligthColor = new Color(area.getColor().r + (float) 0.75, area.getColor().g + (float) 0.75, area.getColor().b + (float) 0.75, area.getColor().a + (float) 0.75);
+            shapeRenderer.setColor(ligthColor);
             shapeRenderer.rect(area.getRectangle().x, area.getRectangle().y, area.getRectangle().width, area.getRectangle().height);
         }
-        
-        for(PrimaryBacterium bacter : bacteriums) {
-            Color darkCircle  = new Color(bacter.getColor().r * 3/4, bacter.getColor().g * 3/4, bacter.getColor().b * 3/4, bacter.getColor().a * 3/4);    
-            shapeRenderer.setColor(darkCircle);       
+
+        for (PrimaryBacterium bacter : bacteriums) {
+            Color darkCircle = new Color(bacter.getColor().r * 3 / 4, bacter.getColor().g * 3 / 4, bacter.getColor().b * 3 / 4, bacter.getColor().a * 3 / 4);
+            shapeRenderer.setColor(darkCircle);
             shapeRenderer.circle(bacter.getX(), bacter.getY(), bacter.getRadius());
             shapeRenderer.setColor(bacter.getColor());
-            shapeRenderer.circle(bacter.getX(), bacter.getY(), (float) (bacter.getRadius() * 0.9));   
+            shapeRenderer.circle(bacter.getX(), bacter.getY(), (float) (bacter.getRadius() * 0.9));
         }
-        
+
         // Заканчиваем SpriteBatch
-        shapeRenderer.end();     
-                
+        shapeRenderer.end();
+
     }
 
 }

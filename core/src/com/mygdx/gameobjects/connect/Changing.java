@@ -11,6 +11,7 @@ import com.mygdx.gameobjects.PredatoryBacterium;
  *
  * @author npatutina
  */
-public abstract class Changing{
+public abstract class Changing {
+
     public abstract void changeRadius(PredatoryBacterium bacter, float delta);
 }

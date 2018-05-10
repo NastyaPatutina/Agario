@@ -20,39 +20,39 @@ import java.util.Random;
  * @author npatutina
  */
 public class BotBacterium extends PredatoryBacterium {
-    
+
     public BotBacterium(Changing connection, float x, float y, int radius, GameWorld world) {
         super(connection, x, y, radius, world);
     }
-      
+
     public BotBacterium(Changing connection, GameWorld world, int maxRadius) {
         super(connection);
         _world = world;
-        if (connection instanceof Improves){
+        if (connection instanceof Improves) {
             _color = Color.BLUE;
         } else if (connection instanceof MultiImproves) {
-            _color = Color.CYAN;            
-        }else if (connection instanceof Toxic) {
-            _color = Color.PURPLE;            
+            _color = Color.CYAN;
+        } else if (connection instanceof Toxic) {
+            _color = Color.PURPLE;
         }
-        
+
         do {
-           position.x = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
-           position.y = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
-           radius = abs(random.nextInt() % maxRadius) + 1;
-        } while (_world.containsBacterium(position, (int) (radius + maxRadius/2)));
-        
+            position.x = abs(random.nextInt() % (_world.screenWidth() / maxRadius));
+            position.y = abs(random.nextInt() % (_world.screenWidth() / maxRadius));
+            radius = abs(random.nextInt() % maxRadius) + 1;
+        } while (_world.containsBacterium(position, (int) (radius + maxRadius / 2)));
+
         setMaxRadius(_world.screenWidth() / 50);
     }
-    
+
     int diffIteration;
     final Random random = new Random();
-    
+
     @Override
     public void update(float delta) {
-        
-        SimpleBacterium food  = _world.getNearestSimpleBacterium(this);
-        
+
+        SimpleBacterium food = _world.getNearestSimpleBacterium(this);
+
         if (food != null) {
             if (food.getX() > position.x) {
                 velocity.x = changeVelocity();
@@ -70,19 +70,22 @@ public class BotBacterium extends PredatoryBacterium {
                 velocity.y = 0;
             }
         }
-        
-        if (velocity.x > maxVelocity)
+
+        if (velocity.x > maxVelocity) {
             velocity.x = maxVelocity;
-        if (velocity.y > maxVelocity)
+        }
+        if (velocity.y > maxVelocity) {
             velocity.y = maxVelocity;
-        if (velocity.x < -maxVelocity)
-            velocity.x  = -maxVelocity;
-        if (velocity.y < -maxVelocity)
+        }
+        if (velocity.x < -maxVelocity) {
+            velocity.x = -maxVelocity;
+        }
+        if (velocity.y < -maxVelocity) {
             velocity.y = -maxVelocity;
-        
+        }
+
         position.x += velocity.cpy().x;
         position.y += velocity.cpy().y;
-         
-         
-    }    
+
+    }
 }

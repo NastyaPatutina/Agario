@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package AgarioHelpers;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -13,7 +14,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  *
  * @author npatutina
  */
-
 public class AssetLoader {
 
     public static Texture texture;

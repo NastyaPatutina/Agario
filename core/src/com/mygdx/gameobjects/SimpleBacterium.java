@@ -21,41 +21,41 @@ import java.util.Random;
  * @author npatutina
  */
 public class SimpleBacterium extends PrimaryBacterium {
+
     public SimpleBacterium(Changing connection, float x, float y, int radius, GameWorld world) {
         super(connection, x, y, radius, world);
-    }    
-    
+    }
+
     public SimpleBacterium(Changing connection, GameWorld world, int maxRadius) {
         super(connection);
         _world = world;
-        
-        if (connection instanceof Improves){
+
+        if (connection instanceof Improves) {
             _color = Color.WHITE;
         } else if (connection instanceof MultiImproves) {
-            _color = Color.LIME;            
-        }else if (connection instanceof Toxic) {
-            _color = Color.RED;            
+            _color = Color.LIME;
+        } else if (connection instanceof Toxic) {
+            _color = Color.ORANGE;
         }
         do {
-           position.x = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
-           position.y = abs(random.nextInt() % (_world.screenWidth()/maxRadius));
-           radius = abs(random.nextInt() % maxRadius) + 1;
+            position.x = abs(random.nextInt() % (_world.screenWidth() / maxRadius));
+            position.y = abs(random.nextInt() % (_world.screenWidth() / maxRadius));
+            radius = abs(random.nextInt() % maxRadius) + 1;
         } while (_world.containsBacterium(position, (int) (radius + 5)));
     }
-    
+
     private int velocityMax = 8;
     int iterationMax = 200;
     int deffIteration;
     final Random random = new Random();
 
-    
     @Override
     public void update(float delta) {
-        PredatoryBacterium dangerBacter  = _world.getNearestPredatoryBacterium(this);
-        
+        PredatoryBacterium dangerBacter = _world.getNearestPredatoryBacterium(this);
+
         if (dangerBacter != null) {
             if (dangerBacter.getX() > position.x) {
-                velocity.x = - changeVelocity();
+                velocity.x = -changeVelocity();
             } else if (dangerBacter.getX() < position.x) {
                 velocity.x = changeVelocity();
             } else {
@@ -63,27 +63,30 @@ public class SimpleBacterium extends PrimaryBacterium {
             }
 
             if (dangerBacter.getY() > position.y) {
-                velocity.y = - changeVelocity();
+                velocity.y = -changeVelocity();
             } else if (dangerBacter.getX() < position.y) {
                 velocity.y = changeVelocity();
             } else {
                 velocity.y = 0;
             }
         }
-        
-        if (velocity.x > velocityMax)
+
+        if (velocity.x > velocityMax) {
             velocity.x = velocityMax;
-        if (velocity.y > velocityMax)
+        }
+        if (velocity.y > velocityMax) {
             velocity.y = velocityMax;
-        if (velocity.x < -velocityMax)
-            velocity.x  = -velocityMax;
-        if (velocity.y < -velocityMax)
+        }
+        if (velocity.x < -velocityMax) {
+            velocity.x = -velocityMax;
+        }
+        if (velocity.y < -velocityMax) {
             velocity.y = -velocityMax;
-        
+        }
+
         position.x += velocity.cpy().x;
         position.y += velocity.cpy().y;
-         
-         
+
     }
 
 }

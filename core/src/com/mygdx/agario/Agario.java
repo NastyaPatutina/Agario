@@ -13,6 +13,7 @@ public class Agario extends Game {
         AssetLoader.load();
         setScreen(new GameScreen());
     }
+
     @Override
     public void dispose() {
         super.dispose();

@@ -12,8 +12,8 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author npatutina
  */
-public class StaticArea extends Area{
-    
+public class StaticArea extends Area {
+
     public StaticArea(Rectangle rect) {
         super(rect);
         _color = Color.BLUE;

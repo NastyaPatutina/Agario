@@ -13,22 +13,24 @@ import com.badlogic.gdx.math.Rectangle;
  * @author npatutina
  */
 abstract public class Area {
+
     private Rectangle _rect;
     Color _color;
-    
-    public Area (Rectangle rect) {
-        _rect = rect;    
-    }
-    
-    public Rectangle getRectangle(){
-        return _rect;
-    }
-    public void setRectangle(Rectangle rect){
+
+    public Area(Rectangle rect) {
         _rect = rect;
     }
-    
-    public Color getColor(){
+
+    public Rectangle getRectangle() {
+        return _rect;
+    }
+
+    public void setRectangle(Rectangle rect) {
+        _rect = rect;
+    }
+
+    public Color getColor() {
         return _color;
     }
-    
+
 }

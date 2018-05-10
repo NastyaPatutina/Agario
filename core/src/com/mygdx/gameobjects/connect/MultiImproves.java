@@ -11,12 +11,13 @@ import com.mygdx.gameobjects.PredatoryBacterium;
  *
  * @author npatutina
  */
-public class MultiImproves  extends Changing {
+public class MultiImproves extends Changing {
 
-    public MultiImproves() {};
+    public MultiImproves() {
+    }
 
     @Override
     public void changeRadius(PredatoryBacterium bacter, float delta) {
-        bacter.addRadius(delta*2);
+        bacter.addRadius(delta * 2);
     }
 }

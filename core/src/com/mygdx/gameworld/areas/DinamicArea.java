@@ -11,12 +11,12 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author npatutina
  */
-public abstract class DinamicArea extends Area{
-    
+public abstract class DinamicArea extends Area {
+
     abstract public float getModificationVelocity();
-    
+
     public DinamicArea(Rectangle rect) {
         super(rect);
     }
-    
+
 }

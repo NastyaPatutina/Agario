@@ -17,10 +17,10 @@ public class InputHandler implements InputProcessor {
     private PlayerBacterium _bacterium;
 
     public InputHandler(PlayerBacterium bacterium) {
-       _bacterium = bacterium;
+        _bacterium = bacterium;
     }
-    
-   @Override
+
+    @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         return false;
     }
@@ -31,7 +31,7 @@ public class InputHandler implements InputProcessor {
             _bacterium.getWorld().start();
         }
         _bacterium.keyDown(keycode);
-        
+
         if (_bacterium.getWorld().isGameOver()) {
             // Обнулим все перменные, перейдем в GameState.READ
             _bacterium.getWorld().restart();

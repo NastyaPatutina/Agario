@@ -13,11 +13,12 @@ import com.mygdx.gameobjects.PredatoryBacterium;
  */
 public class Toxic extends Changing {
 
-    public Toxic() {};
+    public Toxic() {
+    }
 
     @Override
     public void changeRadius(PredatoryBacterium bacter, float delta) {
-        bacter.lowRadius(delta);  
+        bacter.lowRadius(delta);
     }
-    
+
 }

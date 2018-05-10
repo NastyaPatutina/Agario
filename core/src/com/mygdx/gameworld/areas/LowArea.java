@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author npatutina
  */
-public class LowArea extends DinamicArea{
+public class LowArea extends DinamicArea {
 
     public LowArea(Rectangle rect) {
         super(rect);
@@ -24,5 +24,4 @@ public class LowArea extends DinamicArea{
         return (float) 0.5;
     }
 
-    
 }

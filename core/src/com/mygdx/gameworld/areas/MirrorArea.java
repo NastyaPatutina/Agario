@@ -12,8 +12,8 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author npatutina
  */
-public class MirrorArea extends DinamicArea{
-    
+public class MirrorArea extends DinamicArea {
+
     public MirrorArea(Rectangle rect) {
         super(rect);
         _color = Color.PURPLE;
@@ -24,5 +24,4 @@ public class MirrorArea extends DinamicArea{
         return -1;
     }
 
-    
 }
