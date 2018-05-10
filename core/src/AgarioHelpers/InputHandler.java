@@ -7,6 +7,7 @@ package AgarioHelpers;
 
 import com.badlogic.gdx.InputProcessor;
 import com.mygdx.gameobjects.PlayerBacterium;
+import com.mygdx.gameobjects.PlayerRealBacterium;
 
 /**
  *
@@ -30,7 +31,9 @@ public class InputHandler implements InputProcessor {
         if (_bacterium.getWorld().isReady()) {
             _bacterium.getWorld().start();
         }
-        _bacterium.keyDown(keycode);
+        if(_bacterium instanceof PlayerRealBacterium) {
+            ((PlayerRealBacterium)_bacterium).keyDown(keycode);
+        }
 
         if (_bacterium.getWorld().isGameOver()) {
             // Обнулим все перменные, перейдем в GameState.READ
@@ -41,7 +44,9 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-        _bacterium.keyUp(keycode);
+        if(_bacterium instanceof PlayerRealBacterium) {
+            ((PlayerRealBacterium)_bacterium).keyUp(keycode);
+        }
         return false;
     }
 

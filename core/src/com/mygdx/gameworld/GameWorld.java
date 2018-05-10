@@ -9,6 +9,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.gameobjects.BotBacterium;
 import com.mygdx.gameobjects.PlayerBacterium;
+import com.mygdx.gameobjects.PlayerBotBacterium;
+import com.mygdx.gameobjects.PlayerRealBacterium;
 import com.mygdx.gameobjects.PredatoryBacterium;
 import com.mygdx.gameobjects.PrimaryBacterium;
 import com.mygdx.gameobjects.SimpleBacterium;
@@ -84,7 +86,7 @@ public class GameWorld {
     }
 
     private void fillworld() {
-        _bacteriums.add(new PlayerBacterium(33, 40, maxRadius, this));
+        _bacteriums.add(new PlayerBotBacterium(33, 40, maxRadius, this));
         for (int i = 0; i < maxCountOfBacteriums / 7; i++) {
             _bacteriums.add(new SimpleBacterium(new Improves(), this, maxRadius));
         }
@@ -281,7 +283,7 @@ public class GameWorld {
         PredatoryBacterium minBacter = null;
 
         for (PrimaryBacterium bacter : _bacteriums) {
-            if (bacter instanceof PredatoryBacterium && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)) {
+            if (currentBacter !=  bacter && bacter instanceof PredatoryBacterium && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)) {
                 minBacter = (PredatoryBacterium) bacter;
                 minDistance = currentBacter.distance(bacter.getX(), bacter.getY());
             }
@@ -294,12 +296,23 @@ public class GameWorld {
         SimpleBacterium minBacter = null;
 
         for (PrimaryBacterium bacter : _bacteriums) {
-            if (bacter instanceof SimpleBacterium && bacter.getRadius() <= currentBacter.getRadius() && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)) {
+            if (currentBacter !=  bacter && bacter instanceof SimpleBacterium && bacter.getRadius() <= currentBacter.getRadius() && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)) {
                 minBacter = (SimpleBacterium) bacter;
                 minDistance = currentBacter.distance(bacter.getX(), bacter.getY());
             }
         }
         return minBacter;
     }
+    public PrimaryBacterium getNearestNotToxicBacterium(PrimaryBacterium currentBacter) {
+        float minDistance = 10000;
+        PrimaryBacterium minBacter = null;
 
+        for (PrimaryBacterium bacter : _bacteriums) {
+            if (currentBacter !=  bacter && bacter.getRadius() <= currentBacter.getRadius() && !bacter.isToxic() && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)) {
+                minBacter = bacter;
+                minDistance = currentBacter.distance(bacter.getX(), bacter.getY());
+            }
+        }
+        return minBacter;
+    }
 }

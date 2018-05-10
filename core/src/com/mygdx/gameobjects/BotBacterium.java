@@ -64,7 +64,7 @@ public class BotBacterium extends PredatoryBacterium {
 
             if (food.getY() > position.y) {
                 velocity.y = changeVelocity();
-            } else if (food.getX() < position.y) {
+            } else if (food.getY() < position.y) {
                 velocity.y = -changeVelocity();
             } else {
                 velocity.y = 0;

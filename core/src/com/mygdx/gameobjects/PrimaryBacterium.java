@@ -8,6 +8,7 @@ package com.mygdx.gameobjects;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.gameobjects.connect.Changing;
+import com.mygdx.gameobjects.connect.Toxic;
 import com.mygdx.gameworld.GameWorld;
 import static java.lang.Math.pow;
 
@@ -119,6 +120,10 @@ public abstract class PrimaryBacterium {
 
     void change(PredatoryBacterium other) {
         _connection.changeRadius(other, this.getRadius() / 3);
+    }
+    
+    public boolean isToxic() {
+        return _connection instanceof Toxic;
     }
 
 }
