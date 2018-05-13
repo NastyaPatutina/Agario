@@ -46,12 +46,12 @@ public class GameWorld {
     private ArrayList<Area> _areas = new ArrayList();
     int maxCountOfBacteriums;
 
-    public GameWorld(float screenWidth, float screenHeight) {
+    public GameWorld(float screenWidth, float screenHeight, boolean isBot) {
         currentState = GameState.READY;
         _screenWidth = screenWidth;
         _screenHeight = screenHeight;
         maxCountOfBacteriums = (int) ((screenHeight * screenWidth) / pow(screenHeight / 5, 2));
-        fillworld();
+        fillworld(isBot);
 
     }
 
@@ -85,8 +85,12 @@ public class GameWorld {
         return 1;
     }
 
-    private void fillworld() {
-        _bacteriums.add(new PlayerBotBacterium(33, 40, maxRadius, this));
+    private void fillworld(boolean isBot) {
+        if (isBot) {
+            _bacteriums.add(new PlayerBotBacterium(33, 40, maxRadius, this));
+        } else {
+            _bacteriums.add(new PlayerRealBacterium(33, 40, maxRadius, this));
+        }
         for (int i = 0; i < maxCountOfBacteriums / 7; i++) {
             _bacteriums.add(new SimpleBacterium(new Improves(), this, maxRadius));
         }
@@ -119,7 +123,10 @@ public class GameWorld {
             case READY:
                 updateReady(delta);
                 break;
-
+            case GAMEOVER:
+                _bacteriums.clear();
+                _areas.clear();
+                break;
             case RUNNING:
             default:
                 updateRunning(delta);
@@ -266,12 +273,12 @@ public class GameWorld {
         currentState = GameState.RUNNING;
     }
 
-    public void restart() {
+    public void restart(boolean isBot) {
         currentState = GameState.READY;
         _bacteriums.clear();
         _areas.clear();
-        fillworld();
-        generateAreas();
+        //fillworld(isBot);
+        //generateAreas();
     }
 
     public boolean isGameOver() {
@@ -283,7 +290,7 @@ public class GameWorld {
         PredatoryBacterium minBacter = null;
 
         for (PrimaryBacterium bacter : _bacteriums) {
-            if (currentBacter !=  bacter && bacter instanceof PredatoryBacterium && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)) {
+            if (currentBacter != bacter && bacter instanceof PredatoryBacterium && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)) {
                 minBacter = (PredatoryBacterium) bacter;
                 minDistance = currentBacter.distance(bacter.getX(), bacter.getY());
             }
@@ -296,19 +303,20 @@ public class GameWorld {
         SimpleBacterium minBacter = null;
 
         for (PrimaryBacterium bacter : _bacteriums) {
-            if (currentBacter !=  bacter && bacter instanceof SimpleBacterium && bacter.getRadius() <= currentBacter.getRadius() && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)) {
+            if (currentBacter != bacter && bacter instanceof SimpleBacterium && bacter.getRadius() <= currentBacter.getRadius() && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)) {
                 minBacter = (SimpleBacterium) bacter;
                 minDistance = currentBacter.distance(bacter.getX(), bacter.getY());
             }
         }
         return minBacter;
     }
+
     public PrimaryBacterium getNearestNotToxicBacterium(PrimaryBacterium currentBacter) {
         float minDistance = 10000;
         PrimaryBacterium minBacter = null;
 
         for (PrimaryBacterium bacter : _bacteriums) {
-            if (currentBacter !=  bacter && bacter.getRadius() <= currentBacter.getRadius() && !bacter.isToxic() && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)) {
+            if (currentBacter != bacter && bacter.getRadius() <= currentBacter.getRadius() && !bacter.isToxic() && (currentBacter.distance(bacter.getX(), bacter.getY()) < minDistance)) {
                 minBacter = bacter;
                 minDistance = currentBacter.distance(bacter.getX(), bacter.getY());
             }

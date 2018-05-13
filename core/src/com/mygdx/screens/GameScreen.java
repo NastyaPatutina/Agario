@@ -6,6 +6,7 @@
 package com.mygdx.screens;
 
 import AgarioHelpers.InputHandler;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.mygdx.gameworld.GameRenderer;
@@ -19,13 +20,13 @@ public class GameScreen implements Screen {
 
     private GameRenderer renderer;
 
-    public GameScreen() {
+    public GameScreen(boolean isBot) {
         float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
         float gameWidth = 136;
         float gameHeight = screenHeight / (screenWidth / gameWidth);
 
-        renderer = new GameRenderer(new GameWorld(screenWidth, screenHeight), (int) gameHeight);
+        renderer = new GameRenderer(new GameWorld(screenWidth, screenHeight, isBot), (int) gameHeight);
         Gdx.app.log("GameScreen", "Attached");
         Gdx.input.setInputProcessor(new InputHandler(renderer.getGameWorld().getPlayerBacterium()));
 
@@ -35,6 +36,11 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         // Мы передаем delta в update метод, для того, чтобы мы могли сделать фреймо-зависимые вычисления
         renderer.getGameWorld().update(delta);// GameWorld updates 
+        
+        if (renderer.getGameWorld().isGameOver()) {
+            // Обнулим все перменные, перейдем в GameState.READ
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen());
+        }
         renderer.render();
     }
 

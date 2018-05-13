@@ -4,6 +4,7 @@ import AgarioHelpers.AssetLoader;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.screens.GameScreen;
+import com.mygdx.screens.MenuScreen;
 
 public class Agario extends Game {
 
@@ -11,7 +12,7 @@ public class Agario extends Game {
     public void create() {
         Gdx.app.log("Agario", "created");
         AssetLoader.load();
-        setScreen(new GameScreen());
+        setScreen(new MenuScreen());
     }
 
     @Override
