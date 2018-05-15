@@ -16,17 +16,14 @@ import static java.lang.Math.pow;
  *
  * @author anast
  */
-public abstract class PrimaryBacterium {
+public abstract class PrimaryBacterium extends GameObject {
 
     float maxVelocity = 200;
-    Vector2 position;
     //private Vector2 acceleration;
     Changing _connection;
     Vector2 velocity;
-    GameWorld _world;
     private float maxPossibleRadius;
 
-    float radius;
     Color _color;
 
     public PrimaryBacterium(Changing connection, float x, float y, float radius, GameWorld world) {
@@ -45,22 +42,8 @@ public abstract class PrimaryBacterium {
         velocity = new Vector2(0, 0);
     }
 
-    public abstract void update(float delta);
-
-    public float getX() {
-        return position.x;
-    }
-
-    public float getY() {
-        return position.y;
-    }
-
     public Color getColor() {
         return _color;
-    }
-
-    public float getRadius() {
-        return radius;
     }
 
     public float getMaxRadius() {
@@ -85,33 +68,6 @@ public abstract class PrimaryBacterium {
         } else {
             radius = 1;
         }
-    }
-
-    public GameWorld getWorld() {
-        return _world;
-    }
-
-    public float distance(float x, float y) {
-        return (float) pow(pow(position.x - x, 2) + pow(position.y - y, 2), 0.5);
-    }
-
-    public boolean intersect(PrimaryBacterium other) {
-        if (distance(other.getX(), other.getY()) < pow(pow((double) (radius + other.getRadius()), 2), 0.5)) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean intersect(Vector2 positionOther, int radiusOther) {
-        if ((Math.pow((double) (position.x - positionOther.x), 2) + Math.pow((double) (position.y - positionOther.y), 2)) < Math.pow((double) (radius + radiusOther), 2)) {
-            return true;
-        }
-        return false;
-    }
-
-    public void setCircle(int x, int y, int radius) {
-        this.radius = radius;
-        position = new Vector2(x, y);
     }
 
     float changeVelocity() {
