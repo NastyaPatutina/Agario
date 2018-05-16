@@ -53,7 +53,6 @@ public class PlayerBotBacterium extends PlayerBacterium {
             velocity.y = -maxVelocity;
         }
 
-        System.out.println(velocity.cpy());
 
         position.x += velocity.cpy().x;
         position.y += velocity.cpy().y;

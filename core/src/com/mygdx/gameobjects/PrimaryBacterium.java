@@ -25,13 +25,14 @@ public abstract class PrimaryBacterium extends GameObject {
     private float maxPossibleRadius;
 
     Color _color;
+    public PrimaryBacterium(float x, float y, float radius, GameWorld world) {
+        super(x, y, radius, world);
+    }
 
     public PrimaryBacterium(Changing connection, float x, float y, float radius, GameWorld world) {
-        this.radius = radius;
+        super(x, y, radius, world);
         _connection = connection;
-        position = new Vector2(x, y);
         velocity = new Vector2(0, 0);
-        _world = world;
         maxPossibleRadius = _world.screenWidth() / 40;
     }
 

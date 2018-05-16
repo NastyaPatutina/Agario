@@ -15,6 +15,18 @@ import static java.lang.Math.pow;
  */
 public abstract class GameObject {
 
+    public GameObject(float x, float y, float radius, GameWorld world) {
+        this.radius = radius;
+        position = new Vector2(x, y);
+        _world = world;
+    }
+    
+    public GameObject() {
+        this.radius = 0;
+        position = new Vector2(0, 0);
+        _world = null;
+    }
+
     Vector2 position;
     GameWorld _world;
     float radius;

@@ -14,6 +14,7 @@ import com.mygdx.gameobjects.PlayerRealBacterium;
 import com.mygdx.gameobjects.PredatoryBacterium;
 import com.mygdx.gameobjects.PrimaryBacterium;
 import com.mygdx.gameobjects.SimpleBacterium;
+import com.mygdx.gameobjects.Whizzbang;
 import com.mygdx.gameobjects.connect.Improves;
 import com.mygdx.gameobjects.connect.MultiImproves;
 import com.mygdx.gameobjects.connect.Toxic;
@@ -44,6 +45,7 @@ public class GameWorld {
     }
     private ArrayList<PrimaryBacterium> _bacteriums = new ArrayList();
     private ArrayList<Area> _areas = new ArrayList();
+    private ArrayList<Whizzbang> _whizzbangs = new ArrayList();
     int maxCountOfBacteriums;
 
     public GameWorld(float screenWidth, float screenHeight, boolean isBot) {
@@ -70,6 +72,10 @@ public class GameWorld {
 
     public float screenWidth() {
         return _screenWidth;
+    }
+
+    public void addWhizzbang(Whizzbang.type type, float x, float y) {
+        _whizzbangs.add(new Whizzbang(x, y, 3, this, type));
     }
 
     public float screenHeight() {
@@ -152,10 +158,24 @@ public class GameWorld {
         for (PrimaryBacterium bacter : _bacteriums) {
             bacter.update(delta);
         }
+        //Обновляем 
+        ArrayList<Whizzbang> wizznNotForRemove = new ArrayList();
+        for (Whizzbang whizzbang : _whizzbangs) {
+            whizzbang.update(delta);
+            if (!whizzbang.isOver()) {
+                wizznNotForRemove.add(whizzbang);
+            }
+        }
+        _whizzbangs = wizznNotForRemove;
     }
 
     public ArrayList<PrimaryBacterium> getBacteriums() {
         return _bacteriums;
+
+    }
+
+    public ArrayList<Whizzbang> getWhizzbangs() {
+        return _whizzbangs;
 
     }
 
@@ -311,6 +331,19 @@ public class GameWorld {
         return minBacter;
     }
 
+    public Whizzbang getNearestPullWhizzbang(PrimaryBacterium currentBacter) {
+        Whizzbang nearest = null;
+        float minDistance = 10000;
+
+        for (Whizzbang whizzbang : _whizzbangs) {
+            if (whizzbang.getType() == Whizzbang.type.PULL && (currentBacter.distance(whizzbang.getX(), whizzbang.getY()) < minDistance)) {
+                nearest = whizzbang;
+                minDistance = currentBacter.distance(whizzbang.getX(), whizzbang.getY());
+            }
+        }
+        return nearest;
+    }
+
     public PrimaryBacterium getNearestNotToxicBacterium(PrimaryBacterium currentBacter) {
         float minDistance = 10000;
         PrimaryBacterium minBacter = null;
@@ -322,5 +355,16 @@ public class GameWorld {
             }
         }
         return minBacter;
+    }
+
+    public ArrayList<PrimaryBacterium> getBacteriumInDistance(int x, int y, int distance) {
+        ArrayList<PrimaryBacterium> minBacters = new ArrayList();
+
+        for (PrimaryBacterium bacter : _bacteriums) {
+            if (bacter.distance(x, y) < distance) {
+                minBacters.add(bacter);
+            }
+        }
+        return minBacters;
     }
 }

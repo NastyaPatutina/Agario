@@ -51,8 +51,13 @@ public class BotBacterium extends PredatoryBacterium {
     @Override
     public void update(float delta) {
 
-        SimpleBacterium food = _world.getNearestSimpleBacterium(this);
-
+        GameObject food;
+        if (_world.getNearestPullWhizzbang(this) != null) {
+            food = _world.getNearestPullWhizzbang(this);
+        } else {
+            food = _world.getNearestSimpleBacterium(this);
+        }
+        
         if (food != null) {
             if (food.getX() > position.x) {
                 velocity.x = changeVelocity();

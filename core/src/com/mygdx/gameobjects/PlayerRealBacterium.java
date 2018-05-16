@@ -28,8 +28,6 @@ public class PlayerRealBacterium extends PlayerBacterium {
     @Override
     public void update(float delta) {
 
-        System.out.println(velocity.cpy());
-
         if (velocity.cpy().y > maxVelocity) {
             velocity.cpy().y = maxVelocity;
         }
