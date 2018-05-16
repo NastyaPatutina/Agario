@@ -51,7 +51,7 @@ public abstract class GameObject {
         return (float) pow(pow(position.x - x, 2) + pow(position.y - y, 2), 0.5);
     }
 
-    public boolean intersect(PrimaryBacterium other) {
+    public boolean intersect(GameObject other) {
         if (distance(other.getX(), other.getY()) < pow(pow((double) (radius + other.getRadius()), 2), 0.5)) {
             return true;
         }

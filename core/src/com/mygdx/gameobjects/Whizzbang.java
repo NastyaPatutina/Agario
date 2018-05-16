@@ -44,7 +44,8 @@ public class Whizzbang extends GameObject {
         return type;
     }
 
-    public int getTime() {
+    @Override
+    public float getRadius() {
         return lostTime / 100;
     }
 
