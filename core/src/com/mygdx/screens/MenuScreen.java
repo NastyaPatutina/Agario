@@ -5,6 +5,7 @@
  */
 package com.mygdx.screens;
 
+import AgarioHelpers.AssetLoader;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -78,13 +79,12 @@ public class MenuScreen implements Screen {
         table.top();
 
         // temporary until we have asset manager in
-        Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
         //create buttons
-        TextButton newUserGame = new TextButton("New User Game", skin);        
-        TextButton newBotGame = new TextButton("New Bot Game", skin);
+        TextButton newUserGame = new TextButton("New User Game", AssetLoader.skin);        
+        TextButton newBotGame = new TextButton("New Bot Game", AssetLoader.skin);
 
-        TextButton exit = new TextButton("Exit", skin);
+        TextButton exit = new TextButton("Exit", AssetLoader.skin);
 
         //Add listeners to buttons
         newUserGame.addListener(new ClickListener() {

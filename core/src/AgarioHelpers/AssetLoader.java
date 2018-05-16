@@ -8,7 +8,9 @@ package AgarioHelpers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 /**
  *
@@ -18,8 +20,14 @@ public class AssetLoader {
 
     public static Texture texture;
     public static TextureRegion bg;
+    public static BitmapFont font;
+    public static Skin skin;
 
     public static void load() {
+
+        font = new BitmapFont(Gdx.files.internal("raw/font-export.fnt"));
+        font.getData().setScale(.25f, -.25f);
+        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
         texture = new Texture(Gdx.files.internal("background.png"));
         texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
