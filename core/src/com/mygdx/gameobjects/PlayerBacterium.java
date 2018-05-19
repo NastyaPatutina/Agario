@@ -7,6 +7,7 @@ package com.mygdx.gameobjects;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.gameobjects.connect.Changing;
 import com.mygdx.gameobjects.connect.Improves;
 import com.mygdx.gameworld.GameWorld;
@@ -48,6 +49,9 @@ public class PlayerBacterium extends PredatoryBacterium {
             position.y = 0;
         }
     }
+    public Vector2 getPosition(){
+        return position;
+    }
 
     public void goTo(PrimaryBacterium food) {
         if (food != null) {
@@ -85,6 +89,7 @@ public class PlayerBacterium extends PredatoryBacterium {
         position.y += velocity.cpy().y;
     }
 
+    
     public void keyDown(int keycode) {
         switch (keycode) {
             case Input.Keys.LEFT:

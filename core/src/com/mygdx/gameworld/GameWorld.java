@@ -26,7 +26,18 @@ public class GameWorld {
     float _screenWidth;
     float _screenHeight;
     int maxRadius = 7;
+    int defaultWidth = 100;
+    int defaultHeight = 100;
+
     float _gameHeight;
+
+    GameWorld() {
+        currentState = GameState.READY;
+        _screenWidth = defaultWidth;
+        _screenHeight = defaultHeight;
+        _bacteriums.add(new PlayerBacterium(defaultWidth / 3, defaultHeight / 3, maxRadius, this));
+
+    }
 
     public enum GameState {
         READY, RUNNING, GAMEOVER
@@ -156,6 +167,11 @@ public class GameWorld {
 
     public ArrayList<PrimaryBacterium> getBacteriums() {
         return _bacteriums;
+
+    }
+
+    public void addBacteriums(ArrayList<PrimaryBacterium> bacteriums) {
+        _bacteriums.addAll(bacteriums);
 
     }
 
