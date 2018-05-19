@@ -9,7 +9,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.mygdx.gameobjects.PlayerBacterium;
-import com.mygdx.gameobjects.PlayerRealBacterium;
 import com.mygdx.gameobjects.Whizzbang;
 import com.mygdx.screens.GameScreen;
 import com.mygdx.screens.MenuScreen;
@@ -34,10 +33,10 @@ public class InputHandler implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         switch (button) {
             case 0:
-                _bacterium.getWorld().addWhizzbang(Whizzbang.type.PULL, screenX * _bacterium.getWorld().getGameWidth() / Gdx.graphics.getWidth(), screenY* _bacterium.getWorld().getGameHeight() / Gdx.graphics.getHeight());
+                _bacterium.getWorld().addWhizzbang(Whizzbang.type.PULL, screenX * _bacterium.getWorld().getGameWidth() / Gdx.graphics.getWidth(), screenY * _bacterium.getWorld().getGameHeight() / Gdx.graphics.getHeight());
                 break;
             case 1:
-                _bacterium.getWorld().addWhizzbang(Whizzbang.type.TOXIC, screenX * _bacterium.getWorld().getGameWidth() / Gdx.graphics.getWidth(), screenY* _bacterium.getWorld().getGameHeight() / Gdx.graphics.getHeight());
+                _bacterium.getWorld().addWhizzbang(Whizzbang.type.TOXIC, screenX * _bacterium.getWorld().getGameWidth() / Gdx.graphics.getWidth(), screenY * _bacterium.getWorld().getGameHeight() / Gdx.graphics.getHeight());
                 break;
             default:
                 System.out.println("touchDown");
@@ -52,19 +51,14 @@ public class InputHandler implements InputProcessor {
         if (_bacterium.getWorld().isReady()) {
             _bacterium.getWorld().start();
         }
-
-        if (_bacterium instanceof PlayerRealBacterium) {
-            ((PlayerRealBacterium) _bacterium).keyDown(keycode);
-        }
+        _bacterium.keyDown(keycode);
 
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        if (_bacterium instanceof PlayerRealBacterium) {
-            ((PlayerRealBacterium) _bacterium).keyUp(keycode);
-        }
+        _bacterium.keyUp(keycode);
         return false;
     }
 

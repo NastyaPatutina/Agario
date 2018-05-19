@@ -7,21 +7,18 @@ package com.mygdx.gameworld;
 
 import AgarioHelpers.AssetLoader;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.mygdx.gameobjects.PrimaryBacterium;
-import com.mygdx.gameobjects.SimpleBacterium;
-import com.mygdx.gameobjects.Whizzbang;
+import com.mygdx.gameobjects.*;
 import com.mygdx.gameworld.areas.Area;
 import java.util.ArrayList;
-import static javax.swing.Spring.height;
+import modules.Module;
+import modules.ModuleEngine;
 
 /**
  *
@@ -36,6 +33,7 @@ public class GameRenderer {
 
     private SpriteBatch batcher;
     private int gameHeight;
+    private Module module;
 
     public GameRenderer(GameWorld world, int gameHeight) {
         myWorld = world;
@@ -64,6 +62,10 @@ public class GameRenderer {
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        if (this.module != null) {
+            this.module.run();
+        }
 
         // Стартуем ShapeRenderer
         shapeRenderer.begin(ShapeType.Filled);
@@ -96,11 +98,15 @@ public class GameRenderer {
             shapeRenderer.setColor(Color.RED);
             shapeRenderer.circle(whizzbang.getX(), whizzbang.getY(), (float) (whizzbang.getRadius() * 0.9));
         }
-        
+
         batcher.end();
         // Заканчиваем SpriteBatch
         shapeRenderer.end();
 
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
     }
 
 }

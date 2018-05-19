@@ -3,7 +3,6 @@ package com.mygdx.agario;
 import AgarioHelpers.AssetLoader;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.mygdx.screens.GameScreen;
 import com.mygdx.screens.MenuScreen;
 
 public class Agario extends Game {

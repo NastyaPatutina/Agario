@@ -7,23 +7,11 @@ package com.mygdx.gameworld;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.gameobjects.BotBacterium;
-import com.mygdx.gameobjects.PlayerBacterium;
-import com.mygdx.gameobjects.PlayerBotBacterium;
-import com.mygdx.gameobjects.PlayerRealBacterium;
-import com.mygdx.gameobjects.PredatoryBacterium;
-import com.mygdx.gameobjects.PrimaryBacterium;
-import com.mygdx.gameobjects.SimpleBacterium;
-import com.mygdx.gameobjects.Whizzbang;
+import com.mygdx.gameobjects.*;
 import com.mygdx.gameobjects.connect.Improves;
 import com.mygdx.gameobjects.connect.MultiImproves;
 import com.mygdx.gameobjects.connect.Toxic;
-import com.mygdx.gameworld.areas.Area;
-import com.mygdx.gameworld.areas.DinamicArea;
-import com.mygdx.gameworld.areas.FastArea;
-import com.mygdx.gameworld.areas.LowArea;
-import com.mygdx.gameworld.areas.MirrorArea;
-import com.mygdx.gameworld.areas.StaticArea;
+import com.mygdx.gameworld.areas.*;
 import static java.lang.Math.pow;
 import java.util.ArrayList;
 import java.util.Random;
@@ -53,7 +41,7 @@ public class GameWorld {
         _screenWidth = screenWidth;
         _screenHeight = screenHeight;
         maxCountOfBacteriums = (int) ((screenHeight * screenWidth) / pow(screenHeight / 5, 2));
-        fillworld(isBot);
+        fillworld();
 
     }
 
@@ -91,12 +79,9 @@ public class GameWorld {
         return 1;
     }
 
-    private void fillworld(boolean isBot) {
-        if (isBot) {
-            _bacteriums.add(new PlayerBotBacterium(33, 40, maxRadius, this));
-        } else {
-            _bacteriums.add(new PlayerRealBacterium(33, 40, maxRadius, this));
-        }
+    private void fillworld() {
+        _bacteriums.add(new PlayerBacterium(33, 40, maxRadius, this));
+
         for (int i = 0; i < maxCountOfBacteriums / 7; i++) {
             _bacteriums.add(new SimpleBacterium(new Improves(), this, maxRadius));
         }

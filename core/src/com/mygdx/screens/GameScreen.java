@@ -11,6 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.mygdx.gameworld.GameRenderer;
 import com.mygdx.gameworld.GameWorld;
+import modules.ModuleEngine;
 
 /**
  *
@@ -25,8 +26,11 @@ public class GameScreen implements Screen {
         float screenHeight = Gdx.graphics.getHeight();
         float gameWidth = 136;
         float gameHeight = screenHeight / (screenWidth / gameWidth);
-
-        renderer = new GameRenderer(new GameWorld(screenWidth, screenHeight, isBot), (int) gameHeight);
+        GameWorld myWorld = new GameWorld(screenWidth, screenHeight, isBot);
+        renderer = new GameRenderer(myWorld, (int) gameHeight);
+        if (isBot) {
+            ModuleEngine.main(null, renderer, myWorld);
+        }
         Gdx.app.log("GameScreen", "Attached");
         Gdx.input.setInputProcessor(new InputHandler(renderer.getGameWorld().getPlayerBacterium()));
 
@@ -36,10 +40,10 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         // Мы передаем delta в update метод, для того, чтобы мы могли сделать фреймо-зависимые вычисления
         renderer.getGameWorld().update(delta);// GameWorld updates 
-        
+
         if (renderer.getGameWorld().isGameOver()) {
             // Обнулим все перменные, перейдем в GameState.READ
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen());
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen());
         }
         renderer.render();
     }
