@@ -29,7 +29,7 @@ public class ModuleGameTest {
         ModuleGame bot = new ModuleGame();
         bot.load(null, gw, null);
         bot.run();
-        Assert.assertEquals(new Vector2((float)33.0175, (float)33.0175), gw.getPlayerBacterium().getPosition());
+        Assert.assertEquals(new Vector2((float) 33.0175, (float) 33.0175), gw.getPlayerBacterium().getPosition());
     }
 
     @Test
@@ -45,8 +45,7 @@ public class ModuleGameTest {
         Assert.assertEquals(new Vector2(100 / 3, 100 / 3), gw.getPlayerBacterium().getPosition());
 
     }
-    
-    
+
     @Test
     public void OneBigBacterInTheWorld() {
         GameWorld gw = new GameWorld();
@@ -66,7 +65,7 @@ public class ModuleGameTest {
         GameWorld gw = new GameWorld();
         ArrayList<PrimaryBacterium> bacteriums = new ArrayList();
         bacteriums.add(new SimpleBacterium(new Improves(), 0, 0, 3, gw));
-        bacteriums.add(new SimpleBacterium(new Improves(), 50, 100/3, 5, gw));
+        bacteriums.add(new SimpleBacterium(new Improves(), 50, 100 / 3, 5, gw));
         bacteriums.add(new BotBacterium(new Toxic(), 10, 10, 5, gw));
         bacteriums.add(new SimpleBacterium(new Toxic(), 90, 10, 5, gw));
         bacteriums.add(new BotBacterium(new Improves(), 80, 80, 10, gw));
@@ -75,7 +74,7 @@ public class ModuleGameTest {
         ModuleGame bot = new ModuleGame();
         bot.load(null, gw, null);
         bot.run();
-        Assert.assertEquals(new Vector2((float)32.9825, 100 / 3), gw.getPlayerBacterium().getPosition());
+        Assert.assertEquals(new Vector2((float) 32.9825, 100 / 3), gw.getPlayerBacterium().getPosition());
     }
 
     @Test
@@ -83,7 +82,7 @@ public class ModuleGameTest {
         GameWorld gw = new GameWorld();
         ArrayList<PrimaryBacterium> bacteriums = new ArrayList();
         bacteriums.add(new SimpleBacterium(new Toxic(), 0, 0, 3, gw));
-        bacteriums.add(new SimpleBacterium(new Toxic(), 50, 100/3, 5, gw));
+        bacteriums.add(new SimpleBacterium(new Toxic(), 50, 100 / 3, 5, gw));
         bacteriums.add(new BotBacterium(new Toxic(), 10, 10, 5, gw));
         bacteriums.add(new SimpleBacterium(new Toxic(), 90, 10, 5, gw));
         bacteriums.add(new BotBacterium(new Toxic(), 80, 80, 10, gw));
@@ -92,6 +91,6 @@ public class ModuleGameTest {
         ModuleGame bot = new ModuleGame();
         bot.load(null, gw, null);
         bot.run();
-        Assert.assertEquals(new Vector2(0, 0), gw.getPlayerBacterium().getPosition());
+        Assert.assertEquals(new Vector2(100 / 3, 100 / 3), gw.getPlayerBacterium().getPosition());
     }
 }
